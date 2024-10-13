@@ -1,9 +1,16 @@
 """TURNOS POR PROFESIONAL"""
-def desplegarTurnosPorProfesional(listTurnosProgramados):
+def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuardados):
+    for dni, profesional in diccProfesionalesGuardados.items():
+
+        #verificar si el profesional esta activo
+        if profesional["activo"] == True:
+            #mostrar informacion clave de cada profesional para luego seleccionar a uno
+            print(f"DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}.")
+    
     documentoIdentidadProfesional = input("Ingrese el DNI del profesional para ver sus turnos: ")
 
     # Filtrar turnos por el especialista (DNI)
-    turnosEspecialista = [turno for turno in listTurnosProgramados if turno['especialista'] == documentoIdentidadProfesional]
+    turnosEspecialista = [turno for turno in listTurnosProgramados if turno['documentoIdentidadEspecialista'] == documentoIdentidadProfesional]
     if not turnosEspecialista:
         print(f"No se encontraron turnos para el profesional con DNI {documentoIdentidadProfesional}.")
         return
@@ -12,8 +19,9 @@ def desplegarTurnosPorProfesional(listTurnosProgramados):
         for cont, turno in enumerate(turnosEspecialista, 1):
             print(f"Turno : {cont}")
             print("-------------------------------------------------------------------------------------------------------------")
-            print(f"Cliente DNI: {turno['documentoIdentidad']}, Mascota: {turno['indiceMascota']}, "
+            print(f"Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota: {turno['indiceMascota']}, "
                 f"Fecha: {turno['fecha']}, Hora: {turno['horario']}, Motivo: {turno['motivo']}")
+    return
 
 """TURNOS POR MASCOTA"""
 def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados):
@@ -41,3 +49,4 @@ def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados):
             print("-------------------------------------------------------------------------------------------------------------")
             print(f"Cliente DNI: {turno['documentoIdentidad']}, Mascota: {listMascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
                             f"Fecha: {turno['fecha']}, Hora: {turno['horario']}, Motivo: {turno['motivo']}")
+    return

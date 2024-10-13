@@ -8,7 +8,7 @@ def informacionClienteNuevo(diccClientesGuardados):
 
     while documentoIdentidadCliente in diccClientesGuardados:
         print("El DNI ya se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu.")
+        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu\n:")
         if decision == "1":
             documentoIdentidadCliente = input("DNI del cliente: ")
         elif decision == "2":
@@ -18,7 +18,6 @@ def informacionClienteNuevo(diccClientesGuardados):
             #terminar el flujo y volver al menu
             return
             
-
     nombreCompleto = input("Nombre completo: ")
     genero = input("Genero: ")
 
@@ -61,7 +60,22 @@ def modificarInformacionCliente(diccClientesGuardados):
     documentoIdentidadCliente = input("DNI del cliente: ")
     while documentoIdentidadCliente not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        documentoIdentidadCliente = input("DNI del cliente: ")
+        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Agregar un nuevo cliente, [3] Regresar al menu\n:")
+        if decision == "1":
+            documentoIdentidadCliente = input("DNI del cliente: ")
+        elif decision == "2":
+            #agregar un nuevo cliente
+            informacionCliente = informacionClienteNuevo(diccClientesGuardados)
+            if informacionCliente:
+                guardarCliente(informacionCliente, diccClientesGuardados)
+            print("Nuevo cliente agregado exitosamente.")
+            return 
+        elif decision == "3":
+            print("--------------------------------------------------------------------------------")
+            print("Volviendo al menu...")
+            print("--------------------------------------------------------------------------------")
+            #terminar el flujo y volver al menu
+            return
 
     #mostrar la informacion actual del cliente
     informacionActualCliente = diccClientesGuardados[documentoIdentidadCliente]
@@ -90,4 +104,3 @@ def modificarInformacionCliente(diccClientesGuardados):
     domicilio = input("Domicilio: ")
 
     return documentoIdentidadCliente, nombreCompleto, genero, fechaNacimiento, numeroTelefono, domicilio
-

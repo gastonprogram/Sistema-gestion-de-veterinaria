@@ -210,9 +210,9 @@ def main():
         "activo": False
     }}
     turnosProgramados = [{
-        "documentoIdentidad": "47294258",
+        "documentoIdentidadCliente": "47294258",
         "indiceMascota": "0",
-        "especialista": "47482192",
+        "documentoIdentidadEspecialista": "47482192",
         "fecha": "21/06/2024",
         "horario": "09:00",
         "motivo": "operacion"
@@ -263,7 +263,8 @@ def main():
                     informacionClienteModificar = modificarInformacionCliente(clientesGuardados)
                     
                     #guardar la informacion del cliente a modificar en el diccionario
-                    guardarCliente(informacionClienteModificar, clientesGuardados)
+                    if informacionClienteModificar:
+                        guardarCliente(informacionClienteModificar, clientesGuardados)
 
                 elif opcion_clientes == "0":  # Volver al menú principal
                     break
@@ -355,7 +356,6 @@ def main():
 
                 elif opcion_turnos == "0":  # Volver al menú principal
                     break
-
 
         elif opcion_principal == "5":  # Submenú de informes
             while True:
