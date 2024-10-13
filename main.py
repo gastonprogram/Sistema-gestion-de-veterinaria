@@ -273,7 +273,8 @@ def main():
                     infoMascotaNueva = informacionMascotaNueva(clientesGuardados)
 
                     # guardar la informacion de la nueva mascota en la lista
-                    guardarMascotaNueva(infoMascotaNueva, mascotasGuardadas)
+                    if infoMascotaNueva:
+                        guardarMascotaNueva(infoMascotaNueva, mascotasGuardadas)
 
                 elif opcion_mascotas == "2":
                     
@@ -281,7 +282,8 @@ def main():
                     infoMascotaModificar = modificarInformacionMascotaExistente(clientesGuardados, mascotasGuardadas)
                     
                     #guardar la informacion modificada sobre la mascota en la lista
-                    guardarMascotaModificada(infoMascotaModificar, mascotasGuardadas)
+                    if infoMascotaModificar:
+                        guardarMascotaModificada(infoMascotaModificar, mascotasGuardadas)
 
                 
                 elif opcion_mascotas == "0":  # Volver al menú principal
