@@ -25,6 +25,7 @@ def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuarda
 
 """TURNOS POR MASCOTA"""
 def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados):
+
     documentoIdentidadDueño = input("Ingrese el DNI del dueño para ver sus turnos: ")
 
     # Filtrar mascota por el dueño (DNI)
@@ -50,3 +51,18 @@ def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados):
             print(f"Cliente DNI: {turno['documentoIdentidad']}, Mascota: {listMascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
                             f"Fecha: {turno['fecha']}, Hora: {turno['horario']}, Motivo: {turno['motivo']}")
     return
+
+def mostrarTurnosPorFecha(listTurnosProgramados, fechaInicio, fechaFin):
+    print(f"Turnos entre {fechaInicio} y {fechaFin}:")
+    for turno in listTurnosProgramados:
+        if turno['fecha'] >= fechaInicio and turno['fecha'] <= fechaFin:
+            print(f"Fecha: {turno['fecha']}, Horario: {turno['horario']}, Cliente DNI: {turno['documentoIdentidadCliente']}")
+
+def mostrarTurnosPorFechaYHorarios(listTurnosProgramados, fecha, horarioInicio, horarioFin):
+    print(f"Turnos para el {fecha} entre {horarioInicio} y {horarioFin}:")
+    for turno in listTurnosProgramados:
+        if turno['fecha'] == fecha:
+            horaTurno = int(turno['horario'][:2])  # Obtener la hora del turno en formato HH
+            if horarioInicio <= horaTurno < horarioFin:
+                print(f"Horario: {turno['horario']}, Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota Índice: {turno['indiceMascota']}, Especialista DNI: {turno['documentoIdentidadEspecialista']}, Motivo: {turno['motivo']}")
+

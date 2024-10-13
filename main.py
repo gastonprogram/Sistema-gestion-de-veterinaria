@@ -362,9 +362,26 @@ def main():
 
                     desplegarTurnosPorProfesional(turnosProgramados, profesionalesGuardados)
 
-                if opcion_informes == "2":
+                elif opcion_informes == "2":
 
                     desplegarTurnosPorMascota(mascotasGuardadas, turnosProgramados)
+
+                elif opcion_informes == "3":
+
+                    fechaInicio = input("Fecha de inicio: ")
+                    patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
+                    while not re.match(patronFecha, fechaInicio):
+                        print("El formato o la fecha es incorrecta.")
+                        fechaInicio = input("Fecha de inicio: ")
+
+                    fechaFinal = input("Fecha de fin: ")
+                    patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
+                    while not re.match(patronFecha, fechaFinal):
+                        print("El formato o la fecha es incorrecta.")
+                        fechaFinal = input("Fecha de fin: ")
+
+
+                    mostrarTurnosPorFecha(turnosProgramados, fechaInicio, fechaFinal)
             
         elif opcion_principal == "0":
             print("Saliendo del sistema...")
