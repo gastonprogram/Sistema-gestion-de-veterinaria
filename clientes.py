@@ -3,7 +3,6 @@ import re
 #tomar informacion sobre un cliente nuevo
 def informacionClienteNuevo(diccClientesGuardados):
 
-    #solicitar informacion 
     documentoIdentidadCliente = input("DNI del cliente: ")
 
     while documentoIdentidadCliente in diccClientesGuardados:
@@ -21,27 +20,33 @@ def informacionClienteNuevo(diccClientesGuardados):
             print("Ha seleccionado una opcion incorrecta.")
 
             
+    #solicitar el nombre completo y verificar que sea correcto
     nombreCompleto = input("Nombre completo: ")
+    patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
+    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto > 60):
+        print("El formato o longitud es incorrecto.")
+    nombreCompleto = nombreCompleto.lower()
+    nombreCompleto = nombreCompleto.title()
+    
+
     genero = input("Genero: ")
 
+    #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
     fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
     patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    
-    #confirmar que la fecha sea correcta
     while not re.match(patronFechaNacimiento, fechaNacimiento):
         print("El formato o la fecha es incorrecta.")
         fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
 
+    #solicitar el numero de telefono y confirmar que sea correcto 
     numeroTelefono = input("Numero de telefono: ")
     patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
-
-    #confirmar que el numero de telefono sea correcto
     while not re.match(patronNumeroTel, numeroTelefono):
         print("El formato o el numero es incorrecto.")
         numeroTelefono = input("Numero de telefono: ")
 
-
     domicilio = input("Domicilio: ")
+    
     return documentoIdentidadCliente, nombreCompleto, genero, fechaNacimiento, numeroTelefono, domicilio
 
 #guardar informacion cliente
@@ -54,12 +59,13 @@ def guardarCliente(informacionCliente, diccClientesGuardados):
         "numeroTelefono" : numeroTelefono,
         "domicilio": domicilio,
     }
+    
+    print(f"Cliente {nombreCompleto} agregado/a con éxito!")
     return
 
 #modificar cliente existente
 def modificarInformacionCliente(diccClientesGuardados):
 
-    #solicitar dni del cliente a modificar
     documentoIdentidadCliente = input("DNI del cliente: ")
     while documentoIdentidadCliente not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
@@ -88,21 +94,27 @@ def modificarInformacionCliente(diccClientesGuardados):
     for k, v in informacionActualCliente.items():
         print(f"{k}: {v}")
     
+
+    #solicitar el nombre completo y verificar que sea correcto
     nombreCompleto = input("Nombre completo: ")
+    patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
+    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto > 60):
+        print("El formato o longitud es incorrecto.")
+    nombreCompleto = nombreCompleto.lower()
+    nombreCompleto = nombreCompleto.title()
+    
     genero = input("Genero: ")
 
+    #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
     fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
     patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    
-    #confirmar que la fecha sea correcta
     while not re.match(patronFechaNacimiento, fechaNacimiento):
         print("El formato o la fecha es incorrecta.")
         fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
 
+    #solicitar el numero de telefono y confirmar que sea correcto 
     numeroTelefono = input("Numero de telefono: ")
     patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
-
-    #confirmar que el numero de telefono sea correcto
     while not re.match(patronNumeroTel, numeroTelefono):
         print("El formato o el numero es incorrecto.")
         numeroTelefono = input("Numero de telefono: ")
