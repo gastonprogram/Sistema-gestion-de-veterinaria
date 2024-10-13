@@ -17,6 +17,9 @@ def informacionClienteNuevo(diccClientesGuardados):
             print("--------------------------------------------------------------------------------")
             #terminar el flujo y volver al menu
             return
+        else:
+            print("Ha seleccionado una opcion incorrecta.")
+
             
     nombreCompleto = input("Nombre completo: ")
     genero = input("Genero: ")
@@ -76,6 +79,9 @@ def modificarInformacionCliente(diccClientesGuardados):
             print("--------------------------------------------------------------------------------")
             #terminar el flujo y volver al menu
             return
+        else:
+            print("Ha seleccionado una opcion incorrecta.")
+
 
     #mostrar la informacion actual del cliente
     informacionActualCliente = diccClientesGuardados[documentoIdentidadCliente]

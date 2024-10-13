@@ -303,7 +303,8 @@ def main():
                     infoNuevoProfesional = informacionProfesionalNuevo()
                     
                     #guardar la informaicon del profesional en el diccionario
-                    guardarInformacionProfesional(infoNuevoProfesional, profesionalesGuardados)
+                    if infoNuevoProfesional:
+                        guardarInformacionProfesional(infoNuevoProfesional, profesionalesGuardados)
 
                 elif opcion_profesionales == "2": #modificar profesional
 
@@ -311,7 +312,8 @@ def main():
                     infoProfesionalModificar = modificarInformacionProfesional(profesionalesGuardados)
                     
                     #guardar la informacion del profesional a modificar en el diccionario
-                    guardarInformacionProfesional(infoProfesionalModificar, profesionalesGuardados)
+                    if infoProfesionalModificar:
+                        guardarInformacionProfesional(infoProfesionalModificar, profesionalesGuardados)
 
 
                 elif opcion_profesionales == "3": #eliminar profesional
