@@ -40,78 +40,47 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
     #seleccionar especialista
     documentoIdentidadEspecialista = input("Ingrese el DNI del especialista: ")
 
-    #guardar el horario de atenecion del profesional elegido y mostrarlo
+    #obtener y separar el horario del profesional 
     horarios = diccProfesionalesGuardados[documentoIdentidadEspecialista]["horarioAtencion"]
-    horarioInicio = horarios[:2]
-    horarioFinal = horarios[8:10]
-    print(f"Horario de atencion entre {horarioInicio} - {horarioFinal}")
+    horarioInicio = int(horarios[:2])  
+    horarioFinal = int(horarios[8:10])  
+
+    # Crear una lista con todos los horarios en formato HH:00 en del rango de atencion del especialista
+    horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFinal)]
+
 
     #seleccionar la fecha
     fecha = input("Fecha (DD/MM/AAAA): ")
     patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    #confirmar que la fecha sea correcta
     while not re.match(patronFecha, fecha):
         print("El formato o la fecha es incorrecta.")
-        fecha = input("Fecha de Nacimiento (DD/MM/AAAA): ")
-
-    #seleccionar un horario dentro del rango de atencion
-    horario = input("Horario (HH:00): ")
-    horariosInicio = int(horario[:2])
-    horariosfinal = int(horario[3:])
-    patronHorario = "^(0[0-9]|1[0-9]|2[0-3]):00$"
+        fecha = input("Fecha (DD/MM/AAAA): ")
 
 
-    # CORREGIRRRRRRRRRRRRRRRRRRRRRRRR
-    while (horariosInicio < int(horarioInicio) or horariosfinal >= int(horarioFinal)) or not re.match(patronHorario, horario):
-        print("Ingrese el horario del turno dentro del rango y patron definido.")
-        horario = input("Horario (HH:00): ")
-        horariosInicio = int(horario[:2])
-        horariosfinal = int(horario[3:])
-
-
-    #verificar si ese horario esta disponible
+    # Filtrar los horarios que ya estan ocupados
     for turno in listTurnosProgramados:
-        print(turno)
-        print("--------------------------")
-        #si ese horario esta ocupado terminar el flujo
-        while turno['fecha'] == fecha and turno['horario'] == horario and turno['documentoIdentidadEspecialista'] == documentoIdentidadEspecialista:
-            
-            print("----------------------")
-            print("El turno esta ocupado.")
-            print("----------------------")
+        if turno['fecha'] == fecha and turno['documentoIdentidadEspecialista'] == documentoIdentidadEspecialista:
+            if turno['horario'] in horariosDisponibles:
+                horariosDisponibles.remove(turno['horario'])
 
-            
-            decision = input("Ingrese: [1] Ingresar otra fecha y hora, [2] Regresar al menu\n:")
-            if decision == "1":
+    # Mostrar los horarios disponibles al usuario 
+    print("Horarios disponibles:")
+    for i, horario in enumerate(horariosDisponibles):
+        print(f"[{i + 1}] {horario}")
 
-                #seleccionar la fecha
-                fecha = input("Fecha (DD/MM/AAAA): ")
-                patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-                #confirmar que la fecha sea correcta
-                while not re.match(patronFecha, fecha):
-                    print("El formato o la fecha es incorrecta.")
-                    fecha = input("Fecha de Nacimiento (DD/MM/AAAA): ")
+    # Seleccionar un horario disponible con opción numerica
+    seleccion = int(input("Seleccione una opción de horario: "))
+    while seleccion < 1 or seleccion > len(horariosDisponibles):
+        seleccion = int(input("Seleccione una opción válida: "))
 
-                #seleccionar un horario dentro del rango de atencion
-                horario = input("Horario (HH:00): ")
-                horariosInicio = int(horario[:2])
-                horariosfinal = int(horario[3:])
-                patronHorario = "^(0[0-9]|1[0-9]|2[0-3]):00$"
-
-
-            elif decision == "2":
-                print("--------------------------------------------------------------------------------")
-                print("Volviendo al menu...")
-                print("--------------------------------------------------------------------------------")
-                #terminar el flujo y volver al menu
-                return
-            
+    # Asignar el horario seleccionado
+    horarioSeleccionado = horariosDisponibles[seleccion - 1]
             
         
     #ingresar el motivo del turno
     motivo = input("Motivo: ")
 
-    return documentoIdentidad, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horario, motivo
+    return documentoIdentidad, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horarioSeleccionado, motivo
 
 def añadirTurnoCliente(informacionTurno, listTurnosProgramados):
     #desempaquetar la informacion del turno
