@@ -6,16 +6,16 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
     documentoIdentidadDueño = input("DNI del cliente: ")
     while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
 
         if decision == "1":
             documentoIdentidadDueño = input("DNI del cliente: ")
         
         #terminar el flujo y volver al menu
         elif decision == "2":
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             return
         
         else:
@@ -134,16 +134,16 @@ def modificarTurnoCliente(listTurnosProgramados, diccClientesGuardados, diccProf
     documentoIdentidadDueño = input("DNI del cliente: ")
     while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
 
         if decision == "1":
             documentoIdentidadDueño = input("DNI del cliente: ")
         
         #terminar el flujo y volver al menu
         elif decision == "2":
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             return
         
         else:
@@ -318,7 +318,7 @@ def cancelarTurnoCliente(listTurnosProgramados, diccClientesGuardados):
     documentoIdentidadCliente = input("DNI del cliente: ")
     while documentoIdentidadCliente not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadCliente = input("DNI del profesional: ")
         elif decision == "2":
@@ -330,8 +330,16 @@ def cancelarTurnoCliente(listTurnosProgramados, diccClientesGuardados):
         else:
             print("Ha seleccionado una opcion incorrecta.")
     
-    #filtrar los turnos que sean del cliente
-    turnosCliente = [turno for turno in listTurnosProgramados if turno['documentoIdentidadCliente'] == documentoIdentidadCliente and turno["activo" == True]]
+    fecha_actual = datetime.now()
+
+    # Filtrar los turnos que sean del cliente, que no esten cancelados y que sean posteriores a la fecha actual
+    turnosCliente = [
+    turno for turno in listTurnosProgramados 
+    if turno['documentoIdentidadCliente'] == documentoIdentidadCliente 
+    and turno["activo"] == True
+    and datetime.strptime(turno['fecha'], "%d/%m/%Y") >= fecha_actual
+    ]
+
 
     if not turnosCliente:
         print("Este cliente no tiene turnos asignados.")
@@ -343,23 +351,21 @@ def cancelarTurnoCliente(listTurnosProgramados, diccClientesGuardados):
         print(f"[{i}] Fecha: {turno['fecha']}, Horario: {turno['horario']}, Especialista DNI: {turno['documentoIdentidadEspecialista']}, Motivo: {turno['motivo']}")
 
     #seleccionar el turno a cancelar
-    indiceTurno = int(input("Seleccione el turno que desea modificar: "))
+    indiceTurno = int(input("Seleccione el turno que desea cancelar: "))
     while indiceTurno < 0 or indiceTurno >= len(turnosCliente):
         indiceTurno = int(input("Seleccione un índice válido: "))
 
     turnoSeleccionado = turnosCliente[indiceTurno]
     indiceGeneralTurno = listTurnosProgramados.index(turnoSeleccionado)
 
-    confirmarEliminacion = input("Esta seguro que desea cancelar el turno (y/n): ")
-    while confirmarEliminacion.lower != "y" or confirmarEliminacion.lower != "n":
-        print("Ha ingresado un valor incorrecto.")
-        confirmarEliminacion = input("Esta seguro que desea cancelar el turno (y/n): ")
-    
-    #cambiar el valor de activo a false (cancelado)
-    if confirmarEliminacion.lower == "y":
+    #confirmar si quieres cancelar el turno
+    confirmarEliminacion = input("¿Está seguro que desea cancelar el turno (y/n)?: ").lower()
+    while confirmarEliminacion not in ["y", "n"]:
+        print("Valor incorrecto.")
+        confirmarEliminacion = input("¿Está seguro que desea cancelar el turno (y/n)?: ").lower()
+
+    if confirmarEliminacion == "y":
         listTurnosProgramados[indiceGeneralTurno]["activo"] = False
-        print("Se ha cancelado el turno con exito.")
-    elif confirmarEliminacion.lower == "n":
-        print("Se ha elegido cancelar la operacion.")
-    
-    return
+        print("Se ha cancelado el turno con éxito.")
+    else:
+        print("Operación cancelada.")

@@ -7,16 +7,16 @@ def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuarda
             print(f"DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}.")
     
     documentoIdentidadProfesional = input("Ingrese el DNI del profesional para ver sus turnos: ")
-    while documentoIdentidadProfesional in diccProfesionalesGuardados:
+    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadProfesional = input("Ingrese el DNI del profesional para ver sus turnos: ")
         #terminar el flujo y volver al menu
         elif decision == "2":
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
@@ -39,9 +39,9 @@ def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuarda
 def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados, diccClientesGuardados):
 
     documentoIdentidadDueño = input("Ingrese el DNI del dueño para ver sus turnos: ")
-    while documentoIdentidadDueño in diccClientesGuardados:
+    while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadDueño = input("Ingrese el DNI del dueño para ver sus turnos: ")
         #terminar el flujo y volver al menu
@@ -51,7 +51,8 @@ def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados, dicc
             print("--------------------------------------------------------------------------------")
             return
         else:
-            print("Ha seleccionado una opcion incorrecta.")
+            print("Opción no válida.")
+            print("="*50)
 
     # Filtrar mascota por el dueño (DNI)
     mascotasCliente = [mascota for mascota in listMascotasGuardadas if mascota['documentoIdentidadDueño'] == documentoIdentidadDueño]
@@ -74,7 +75,7 @@ def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados, dicc
         if turno["activo"] == True:
             if indiceMascotaGeneral == turno["indiceMascota"]:
                 print("-------------------------------------------------------------------------------------------------------------")
-                print(f"Cliente DNI: {turno['documentoIdentidad']}, Mascota: {listMascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
+                print(f"Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota: {listMascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
                                 f"Fecha: {turno['fecha']}, Hora: {turno['horario']}, Motivo: {turno['motivo']}")
     return
 

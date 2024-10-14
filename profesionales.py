@@ -2,24 +2,37 @@ import re
 
 #tomar informacion de un profesional nuevo
 def informacionProfesionalNuevo(diccProfesionalesGuardados):
+
+    
+    print("=" * 60)
+    print("Ingreso de información de un nuevo profesional".center(60))
+    print("=" * 60)
     documentoIdentidadProfesional = input("DNI del profesional: ")
 
     while documentoIdentidadProfesional in diccProfesionalesGuardados:
         print("El DNI del profesional ya se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
         elif decision == "2":
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             #terminar el flujo y volver al menu
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
 
+    #solicitar el nombre completo y verificar que sea correcto
     nombreCompleto = input("Nombre completo: ")
-    genero = input("Genero: ")
+    patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
+    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto) > 60:
+        print("El formato o longitud es incorrecto.")
+        nombreCompleto = input("Nombre completo: ")
+    nombreCompleto = nombreCompleto.lower()
+    nombreCompleto = nombreCompleto.title()
+    
+    genero = input("Genero (masculino/femenino): ")
     especializacion = input("Especializacion: ")
 
     fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
@@ -34,7 +47,6 @@ def informacionProfesionalNuevo(diccProfesionalesGuardados):
 
     numeroTelefono = input("Numero de telefono: ")
     patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
-
     #confirmar que el numero de telefono sea correcto
     while not re.match(patronNumeroTel, numeroTelefono):
         print("El formato o el numero es incorrecto.")
@@ -64,18 +76,22 @@ def guardarInformacionProfesional(informacionProfesional,diccProfesionalesGuarda
         "horarioAtencion": horarioAtencion,
         "activo" : True
     }
-    print(f"Profesional {nombreCompleto} agregado con éxito!")
+    print(f"Profesional {nombreCompleto} agregado/a con éxito!")
 
     return
 
 #modificar informacion de un profesional ya creado
 def modificarInformacionProfesional(diccProfesionalesGuardados):
+    
+    print("=" * 60)
+    print("Modificacion de información de un profesional".center(60))
+    print("=" * 60)
 
     documentoIdentidadProfesional = input("DNI del profesional: ")
-    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
+    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys() or diccProfesionalesGuardados[documentoIdentidadProfesional]["activo"] == False:
         print("El DNI no se encuentra registrado.")
 
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
 
@@ -89,12 +105,20 @@ def modificarInformacionProfesional(diccProfesionalesGuardados):
         else:
             print("Ha seleccionado una opcion incorrecta.")
 
+    print("=" * 60)
+    print("Informacion del cliente".center(60))
+    print("=" * 60)
+    
+    #mostrar la informacion actual del cliente
     informacionActualProfesional = diccProfesionalesGuardados[documentoIdentidadProfesional]
+
     for k, v in informacionActualProfesional.items():
         print(f"{k}: {v}")
+
+    print("=" * 60)
     
     nombreCompleto = input("Nombre completo: ")
-    genero = input("Genero: ")
+    genero = input("Genero (masculino/femenino): ")
     especializacion = input("Especializacion: ")
 
     fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
@@ -125,33 +149,40 @@ def modificarInformacionProfesional(diccProfesionalesGuardados):
 
 #eliminar profesional existente
 def eliminarProfesional(diccProfesionalesGuardados):
-    
     documentoIdentidadProfesional = input("DNI del profesional: ")
 
-    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
+    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys() or diccProfesionalesGuardados[documentoIdentidadProfesional]["activo"] == False:
         print("El DNI no se encuentra registrado en la lista de profesionales.")
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
         elif decision == "2":
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             #terminar el flujo y volver al menu
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
 
 
-    print(f"DNI: {documentoIdentidadProfesional}\n Nombre:{diccProfesionalesGuardados[documentoIdentidadProfesional]['nombre']}")
-    confirmarEliminacion = input("Esta seguro que desea eliminar el profesional (y/n): ")
-    while confirmarEliminacion.lower != "y" or confirmarEliminacion.lower != "n":
+    print(f"DNI: {documentoIdentidadProfesional}, Nombre: {diccProfesionalesGuardados[documentoIdentidadProfesional]['nombreCompleto']}")
+
+    confirmarEliminacion = input("¿Está seguro que desea eliminar el profesional? (y/n): ").lower()
+    
+    while confirmarEliminacion != "y" and confirmarEliminacion != "n":
         print("Ha ingresado un valor incorrecto.")
-        confirmarEliminacion = input("Esta seguro que desea eliminar el profesional (y/n): ")
-    if confirmarEliminacion.lower == "y":
+        confirmarEliminacion = input("¿Está seguro que desea eliminar el profesional? (y/n): ").lower()
+    
+    if confirmarEliminacion == "y":
         diccProfesionalesGuardados[documentoIdentidadProfesional]["activo"] = False
-        print("Se ha eliminado el profesional con exito.")
-    elif confirmarEliminacion.lower == "n":
-        print("Se ha elegido cancelar la operacion.")
+        print("-" * 50)
+        print("Se ha eliminado el profesional con éxito.")
+        print("-" * 50)
+
+    elif confirmarEliminacion == "n":
+        print("-" * 50)
+        print("Se ha elegido cancelar la operación.")
+        print("-" * 50)
     
     return

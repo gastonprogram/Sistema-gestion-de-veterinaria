@@ -9,17 +9,17 @@ def informacionMascotaNueva(diccClientesGuardados):
         print("El DNI no se encuentra registrado (no puede añadir una mascota sin un dueño).")
 
         #elegir ingresasr otro DNI, agregar un nuevo cliente, o regresar al menu
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [3] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
 
         #buscar otro cliente/dueño
         if decision == "1":
             documentoIdentidadDueño = input("DNI del dueño: ")
         
         #volver al menu
-        elif decision == "3":
-            print("--------------------------------------------------------------------------------")
+        elif decision == "2":
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
@@ -67,17 +67,17 @@ def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuar
         print("El DNI no se encuentra registrado.")
 
         #elegir ingresasr otro DNI, agregar una nueva mascota, agregar un nuevo cliente, o regresar al menu
-        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
 
         #buscar otro cliente
         if decision == "1":
             documentoIdentidadDueño = input("DNI del dueño: ")
         
         #volver al menu
-        elif decision == "4":
-            print("--------------------------------------------------------------------------------")
+        elif decision == "2":
+            print("-" * 50)
             print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
+            print("-" * 50)
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
@@ -97,6 +97,16 @@ def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuar
 
     mascotaSeleccionada = mascotasCliente[indiceMascotaCliente]
     indiceMascotaGeneral = listMascotasGuardadas.index(mascotaSeleccionada)
+
+    print("=" * 60)
+    print("Informacion de la mascota".center(60))
+    print("=" * 60)
+    #mostrar la informacion actual de la mascota
+    informacionActualMascota = listMascotasGuardadas[indiceMascotaGeneral]
+
+    for k, v in informacionActualMascota.items():
+        print(f"{k}: {v}")
+    print("=" * 60)
     
     nombre = input("Nombre del animal: ")
     patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"

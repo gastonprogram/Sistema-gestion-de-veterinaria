@@ -513,22 +513,21 @@ def main():
     }
 ]
 
-
     #-------------------------------------------------
     # Bloque de menú
     #-------------------------------------------------
 
     while True:
         print()
-        print("---------------------------")
-        print("MENÚ DEL SISTEMA           ")
-        print("---------------------------")
+        print("=" * 60)
+        print("MENÚ DEL SISTEMA".center(60))
+        print("=" * 60)
         print("[1] Gestionar Clientes")
         print("[2] Gestionar Mascotas") 
         print("[3] Gestionar Profesionales")
         print("[4] Gestionar Turnos")
         print("[5] Informes")
-        print("---------------------------")
+        print("-" * 50)
         print("[0] Salir del programa")
         print()
             
@@ -536,14 +535,16 @@ def main():
 
         if opcion_principal == "1":  # Submenú de Clientes
             while True:
+                print("-" * 50)
                 print("MENÚ CLIENTES")
                 print("[1] Agregar Cliente")
                 print("[2] Modificar Cliente")
                 print("[0] Volver al menú principal")
+                print("-" * 50)
 
                 opcion_clientes = input("Seleccione una opción: ")
 
-                if opcion_clientes == "1":  # Agregar cliente
+                if opcion_clientes == "1":  # agregar cliente
 
                     # solicitar informacion para crear un nuevo cliente
                     informacionCliente = informacionClienteNuevo(clientesGuardados)
@@ -552,7 +553,7 @@ def main():
                     if informacionCliente:
                         guardarCliente(informacionCliente, clientesGuardados)
 
-                elif opcion_clientes == "2": #modificar cliente
+                elif opcion_clientes == "2": # modificar cliente
 
                     # solicitar informacion para modificar un cliente
                     informacionClienteModificar = modificarInformacionCliente(clientesGuardados)
@@ -566,10 +567,12 @@ def main():
         
         elif opcion_principal == "2":  # Submenú de Mascotas
             while True:
+                print("-" * 50)
                 print("MENÚ MASCOTAS")
                 print("[1] Agregar Mascota")
                 print("[2] Modificar Mascota")
                 print("[0] Volver al menú principal")
+                print("-" * 50)
 
                 opcion_mascotas = input("Seleccione una opción: ")
 
@@ -597,18 +600,20 @@ def main():
         
         elif opcion_principal == "3":  # Submenú de Profesionales
             while True:
+                print("-" * 50)
                 print("MENÚ PROFESIONALES")
                 print("[1] Agregar Profesional")
                 print("[2] Modificar Profesional")
                 print("[3] Eliminar Profesional")
                 print("[0] Volver al menú principal")
+                print("-" * 50)
 
                 opcion_profesionales = input("Seleccione una opción: ")
 
-                if opcion_profesionales == "1":
+                if opcion_profesionales == "1": #añadir profesional
 
                     # solicitar informacion para añadir un nuevo profesional
-                    infoNuevoProfesional = informacionProfesionalNuevo()
+                    infoNuevoProfesional = informacionProfesionalNuevo(profesionalesGuardados)
                     
                     #guardar la informaicon del profesional en el diccionario
                     if infoNuevoProfesional:
@@ -634,15 +639,17 @@ def main():
         
         elif opcion_principal == "4":  # Submenú de Turnos
             while True:
+                print("-" * 50)
                 print("MENÚ TURNOS")
                 print("[1] Programar Turno")
                 print("[2] Modificar Turno")
                 print("[3] Cancelar Turno")
                 print("[0] Volver al menú principal")
+                print("-" * 50)
 
                 opcion_turnos = input("Seleccione una opción: ")
 
-                if opcion_turnos == "1":
+                if opcion_turnos == "1": #programar turno nuevo
                     
                     #solicitar informacion para añadir un nuevo turno
                     infoTurnoNuevo = informacionTurnoCliente(clientesGuardados, mascotasGuardadas, profesionalesGuardados, turnosProgramados)
@@ -652,7 +659,7 @@ def main():
                         añadirTurnoCliente(infoTurnoNuevo, turnosProgramados)
 
 
-                if opcion_turnos == "2":
+                if opcion_turnos == "2": #modificar turno
 
                     #solicitar informacion para modificar un turno
                     infoTurnoModificado = modificarTurnoCliente(turnosProgramados, clientesGuardados, profesionalesGuardados)
@@ -661,7 +668,7 @@ def main():
                     if infoTurnoModificado:
                         guardarTurnoModificado(infoTurnoModificado, turnosProgramados)
 
-                if opcion_turnos == "2":
+                if opcion_turnos == "3": # cancelar turno
 
                     cancelarTurnoCliente(turnosProgramados, clientesGuardados)
 
@@ -670,12 +677,14 @@ def main():
 
         elif opcion_principal == "5":  # Submenú de informes
             while True:
+                print("-" * 50)
                 print("MENÚ INFORMES")
                 print("[1] Turnos por profesional")
                 print("[2] Turnos por mascota")
                 print("[3] Turnos en un rango de dias")
                 print("[4] Turnos en un rango de horas")
                 print("[0] Volver al menú principal")
+                print("-" * 50)
 
                 opcion_informes = input("Seleccione una opción: ")
 
@@ -692,15 +701,15 @@ def main():
 
                     
                     patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-                    fechaInicio = input("Fecha de inicio: ")
+                    fechaInicio = input("Fecha de inicio (DD/MM/AAAA): ")
                     while not re.match(patronFecha, fechaInicio):
                         print("El formato o la fecha es incorrecta.")
-                        fechaInicio = input("Fecha de inicio: ")
+                        fechaInicio = input("Fecha de inicio (DD/MM/AAAA): ")
 
-                    fechaFinal = input("Fecha de fin: ")
+                    fechaFinal = input("Fecha de fin (DD/MM/AAAA): ")
                     while not re.match(patronFecha, fechaFinal):
                         print("El formato o la fecha es incorrecta.")
-                        fechaFinal = input("Fecha de fin: ")
+                        fechaFinal = input("Fecha de fin (DD/MM/AAAA): ")
 
 
                     mostrarTurnosPorFecha(turnosProgramados, fechaInicio, fechaFinal)
@@ -708,6 +717,11 @@ def main():
                 
                 elif opcion_informes == "4":
 
+                    fecha = input("Fecha (DD/MM/AAAA): ")
+                    patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
+                    while not re.match(patronFecha, fechaInicio):
+                        print("El formato o la fecha es incorrecta.")
+                        fechaInicio = input("Fecha (DD/MM/AAAA): ")
 
                     patronHorario = "^(0[0-9]|1[0-9]|2[0-3]):00$"
 
@@ -715,7 +729,6 @@ def main():
                     while not re.match(patronHorario, horarioInicio):
                         print("El formato o la fecha es incorrecta.")
                         horarioInicio = input("Horario de inicio (HH:00): ")
-
                     horarioFinal = input("Horario final (HH:00): ")
                     while not re.match(patronHorario, horarioFinal):
                         print("El formato o la fecha es incorrecta.")
@@ -723,13 +736,6 @@ def main():
 
                     horaInicioRecortado = horarioInicio[:2]
                     horaFinalRecortado = horarioFinal[:2]
-                    print(horaInicioRecortado, horaFinalRecortado)
-
-                    fecha = input("Fecha (DD/MM/AAAA): ")
-                    patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-                    while not re.match(patronFecha, fechaInicio):
-                        print("El formato o la fecha es incorrecta.")
-                        fechaInicio = input("Fecha (DD/MM/AAAA): ")
 
                     mostrarTurnosPorFechaYHorarios(turnosProgramados, fecha, horaInicioRecortado, horaFinalRecortado)
                 
