@@ -7,14 +7,14 @@ def informacionClienteNuevo(diccClientesGuardados):
 
     while documentoIdentidadCliente in diccClientesGuardados:
         print("El DNI ya se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu\n:")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
         if decision == "1":
             documentoIdentidadCliente = input("DNI del cliente: ")
+        #terminar el flujo y volver al menu
         elif decision == "2":
             print("--------------------------------------------------------------------------------")
             print("Volviendo al menu...")
             print("--------------------------------------------------------------------------------")
-            #terminar el flujo y volver al menu
             return
         else:
             print("Ha seleccionado una opcion incorrecta.")
@@ -69,22 +69,18 @@ def modificarInformacionCliente(diccClientesGuardados):
     documentoIdentidadCliente = input("DNI del cliente: ")
     while documentoIdentidadCliente not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Agregar un nuevo cliente, [3] Regresar al menu\n:")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+
         if decision == "1":
             documentoIdentidadCliente = input("DNI del cliente: ")
+        
+        #terminar el flujo y volver al menu
         elif decision == "2":
-            #agregar un nuevo cliente
-            informacionCliente = informacionClienteNuevo(diccClientesGuardados)
-            if informacionCliente:
-                guardarCliente(informacionCliente, diccClientesGuardados)
-            print("Nuevo cliente agregado exitosamente.")
-            return 
-        elif decision == "3":
             print("--------------------------------------------------------------------------------")
             print("Volviendo al menu...")
             print("--------------------------------------------------------------------------------")
-            #terminar el flujo y volver al menu
             return
+        
         else:
             print("Ha seleccionado una opcion incorrecta.")
 

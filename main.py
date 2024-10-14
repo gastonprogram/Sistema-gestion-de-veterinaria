@@ -334,7 +334,7 @@ def main():
     {
         "documentoIdentidadCliente": "30111222",
         "indiceMascota": 0,
-        "documentoIdentidadEspecialista": "30123456",
+        "documentoIdentidadEspecialista": "20221111", 
         "fecha": "10/10/2024",
         "horario": "10:00",
         "motivo": "Consulta general",
@@ -343,7 +343,7 @@ def main():
     {
         "documentoIdentidadCliente": "30222333",
         "indiceMascota": 1,
-        "documentoIdentidadEspecialista": "30223456",
+        "documentoIdentidadEspecialista": "20222222",
         "fecha": "11/10/2024",
         "horario": "11:00",
         "motivo": "Vacunación",
@@ -352,7 +352,7 @@ def main():
     {
         "documentoIdentidadCliente": "30333444",
         "indiceMascota": 2,
-        "documentoIdentidadEspecialista": "30323456",
+        "documentoIdentidadEspecialista": "20233333",
         "fecha": "12/10/2024",
         "horario": "12:00",
         "motivo": "Chequeo anual",
@@ -361,7 +361,7 @@ def main():
     {
         "documentoIdentidadCliente": "30444555",
         "indiceMascota": 3,
-        "documentoIdentidadEspecialista": "30423456",
+        "documentoIdentidadEspecialista": "20221111",
         "fecha": "13/10/2024",
         "horario": "13:00",
         "motivo": "Consulta por alergias",
@@ -370,17 +370,16 @@ def main():
     {
         "documentoIdentidadCliente": "30555666",
         "indiceMascota": 4,
-        "documentoIdentidadEspecialista": "30523456",
+        "documentoIdentidadEspecialista": "20255555",
         "fecha": "14/10/2024",
         "horario": "14:00",
         "motivo": "Control de peso",
         "activo": True
     },
-
     {
         "documentoIdentidadCliente": "30666777",
         "indiceMascota": 5,
-        "documentoIdentidadEspecialista": "30623456",
+        "documentoIdentidadEspecialista": "20222222", 
         "fecha": "15/10/2024",
         "horario": "09:00",
         "motivo": "Consulta general",
@@ -389,7 +388,7 @@ def main():
     {
         "documentoIdentidadCliente": "30777888",
         "indiceMascota": 6,
-        "documentoIdentidadEspecialista": "30723456",
+        "documentoIdentidadEspecialista": "20233333", 
         "fecha": "16/10/2024",
         "horario": "10:00",
         "motivo": "Vacunación",
@@ -398,7 +397,7 @@ def main():
     {
         "documentoIdentidadCliente": "30888999",
         "indiceMascota": 7,
-        "documentoIdentidadEspecialista": "30823456",
+        "documentoIdentidadEspecialista": "20255555",
         "fecha": "17/10/2024",
         "horario": "11:00",
         "motivo": "Chequeo anual",
@@ -407,7 +406,7 @@ def main():
     {
         "documentoIdentidadCliente": "30999000",
         "indiceMascota": 8,
-        "documentoIdentidadEspecialista": "30923456",
+        "documentoIdentidadEspecialista": "20221111",
         "fecha": "18/10/2024",
         "horario": "12:00",
         "motivo": "Consulta por alergias",
@@ -416,7 +415,7 @@ def main():
     {
         "documentoIdentidadCliente": "30100111",
         "indiceMascota": 9,
-        "documentoIdentidadEspecialista": "30123456",
+        "documentoIdentidadEspecialista": "20222222",
         "fecha": "19/10/2024",
         "horario": "13:00",
         "motivo": "Control de peso",
@@ -425,7 +424,7 @@ def main():
     {
         "documentoIdentidadCliente": "31000222",
         "indiceMascota": 0,
-        "documentoIdentidadEspecialista": "30223456",
+        "documentoIdentidadEspecialista": "20255555",
         "fecha": "20/10/2024",
         "horario": "14:00",
         "motivo": "Consulta general",
@@ -434,7 +433,7 @@ def main():
     {
         "documentoIdentidadCliente": "31111333",
         "indiceMascota": 1,
-        "documentoIdentidadEspecialista": "30323456",
+        "documentoIdentidadEspecialista": "20233333", 
         "fecha": "21/10/2024",
         "horario": "09:00",
         "motivo": "Vacunación",
@@ -443,7 +442,7 @@ def main():
     {
         "documentoIdentidadCliente": "31222444",
         "indiceMascota": 2,
-        "documentoIdentidadEspecialista": "30423456",
+        "documentoIdentidadEspecialista": "20221111",
         "fecha": "22/10/2024",
         "horario": "10:00",
         "motivo": "Chequeo anual",
@@ -452,7 +451,7 @@ def main():
     {
         "documentoIdentidadCliente": "31333555",
         "indiceMascota": 3,
-        "documentoIdentidadEspecialista": "30523456",
+        "documentoIdentidadEspecialista": "20222222",
         "fecha": "23/10/2024",
         "horario": "11:00",
         "motivo": "Consulta por alergias",
@@ -461,7 +460,7 @@ def main():
     {
         "documentoIdentidadCliente": "31444666",
         "indiceMascota": 4,
-        "documentoIdentidadEspecialista": "30623456",
+        "documentoIdentidadEspecialista": "20233333",
         "fecha": "24/10/2024",
         "horario": "12:00",
         "motivo": "Control de peso",
@@ -470,7 +469,7 @@ def main():
     {
         "documentoIdentidadCliente": "30111222",
         "indiceMascota": 5,
-        "documentoIdentidadEspecialista": "30723456",
+        "documentoIdentidadEspecialista": "20255555",
         "fecha": "25/10/2024",
         "horario": "13:00",
         "motivo": "Consulta general",
@@ -479,7 +478,7 @@ def main():
     {
         "documentoIdentidadCliente": "30222333",
         "indiceMascota": 6,
-        "documentoIdentidadEspecialista": "30823456",
+        "documentoIdentidadEspecialista": "20221111",
         "fecha": "26/10/2024",
         "horario": "14:00",
         "motivo": "Vacunación",
@@ -488,7 +487,7 @@ def main():
     {
         "documentoIdentidadCliente": "30333444",
         "indiceMascota": 7,
-        "documentoIdentidadEspecialista": "30923456",
+        "documentoIdentidadEspecialista": "20222222",
         "fecha": "27/10/2024",
         "horario": "09:00",
         "motivo": "Chequeo anual",
@@ -497,7 +496,7 @@ def main():
     {
         "documentoIdentidadCliente": "30444555",
         "indiceMascota": 8,
-        "documentoIdentidadEspecialista": "30123456",
+        "documentoIdentidadEspecialista": "20233333",
         "fecha": "28/10/2024",
         "horario": "10:00",
         "motivo": "Consulta por alergias",
@@ -506,7 +505,7 @@ def main():
     {
         "documentoIdentidadCliente": "30555666",
         "indiceMascota": 9,
-        "documentoIdentidadEspecialista": "30223456",
+        "documentoIdentidadEspecialista": "20255555",
         "fecha": "29/10/2024",
         "horario": "11:00",
         "motivo": "Control de peso",
@@ -570,7 +569,6 @@ def main():
                 print("MENÚ MASCOTAS")
                 print("[1] Agregar Mascota")
                 print("[2] Modificar Mascota")
-                print("[3] Eliminar Mascota")
                 print("[0] Volver al menú principal")
 
                 opcion_mascotas = input("Seleccione una opción: ")

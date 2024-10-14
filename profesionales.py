@@ -6,7 +6,7 @@ def informacionProfesionalNuevo(diccProfesionalesGuardados):
 
     while documentoIdentidadProfesional in diccProfesionalesGuardados:
         print("El DNI del profesional ya se encuentra registrado.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu\n:")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
         elif decision == "2":
@@ -75,19 +75,11 @@ def modificarInformacionProfesional(diccProfesionalesGuardados):
     while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
         print("El DNI no se encuentra registrado.")
 
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Agregar un nuevo profesional, [3] Regresar al menu\n:")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
 
         elif decision == "2":
-            #agregar un nuevo profesional
-            informacionProfesional = informacionProfesionalNuevo(diccProfesionalesGuardados)
-            if informacionProfesional:
-                guardarInformacionProfesional(informacionProfesional, diccProfesionalesGuardados)
-            print("Nuevo profesional agregado exitosamente.")
-            return 
-        
-        elif decision == "3":
             print("--------------------------------------------------------------------------------")
             print("Volviendo al menu...")
             print("--------------------------------------------------------------------------------")
@@ -133,10 +125,12 @@ def modificarInformacionProfesional(diccProfesionalesGuardados):
 
 #eliminar profesional existente
 def eliminarProfesional(diccProfesionalesGuardados):
+    
     documentoIdentidadProfesional = input("DNI del profesional: ")
+
     while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
         print("El DNI no se encuentra registrado en la lista de profesionales.")
-        decision = input("Ingrese: [1] Ingresar otro DNI, [2] Regresar al menu\n:")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
         if decision == "1":
             documentoIdentidadProfesional = input("DNI del profesional: ")
         elif decision == "2":

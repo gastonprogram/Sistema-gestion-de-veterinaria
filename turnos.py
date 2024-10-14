@@ -3,13 +3,26 @@ from datetime import datetime
 
 def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccProfesionalesGuardados, listTurnosProgramados):
     #solicitar el DNI del cliente
-    documentoIdentidad = input("DNI del cliente: ")
-    while documentoIdentidad not in diccClientesGuardados.keys():
+    documentoIdentidadDueño = input("DNI del cliente: ")
+    while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        documentoIdentidad = input("DNI del cliente: ")
-    
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
+
+        if decision == "1":
+            documentoIdentidadDueño = input("DNI del cliente: ")
+        
+        #terminar el flujo y volver al menu
+        elif decision == "2":
+            print("--------------------------------------------------------------------------------")
+            print("Volviendo al menu...")
+            print("--------------------------------------------------------------------------------")
+            return
+        
+        else:
+            print("Ha seleccionado una opcion incorrecta.")
+
     #buscar las mascotas del cliente
-    mascotasCliente = [m for m in listMascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidad]
+    mascotasCliente = [m for m in listMascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadDueño]
 
     #si no tiene ninguna terminar el flujo
     if not mascotasCliente:
@@ -29,7 +42,8 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
     mascotaSeleccionada = mascotasCliente[indiceMascota]
     indiceMascotaGeneral = listMascotasGuardadas.index(mascotaSeleccionada)
 
-
+    print("------------------------------------------------------------------------------------------------------------------")
+    print("Informacion especialistas:")
     for dni, profesional in diccProfesionalesGuardados.items():
 
         #verificar si el profesional esta activo
@@ -37,6 +51,7 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
 
             #mostrar informacion clave de cada profesional para luego seleccionar a uno
             print(f"DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}, Horario de atencion: {profesional['horarioAtencion']}.")
+    print("------------------------------------------------------------------------------------------------------------------")
     
     #seleccionar especialista
     documentoIdentidadEspecialista = input("Ingrese el DNI del especialista: ")
@@ -93,15 +108,15 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
     #ingresar el motivo del turno
     motivo = input("Motivo: ")
 
-    return documentoIdentidad, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horarioSeleccionado, motivo
+    return documentoIdentidadDueño, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horarioSeleccionado, motivo
 
 def añadirTurnoCliente(informacionTurno, listTurnosProgramados):
     #desempaquetar la informacion del turno
-    documentoIdentidad, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horario, motivo = informacionTurno
+    documentoIdentidadDueño, indiceMascotaGeneral, documentoIdentidadEspecialista, fecha, horario, motivo = informacionTurno
 
     #agregar un turno a la lista con la informacion correspondiente
     listTurnosProgramados.append({
-        "documentoIdentidadCliente": documentoIdentidad,
+        "documentoIdentidadCliente": documentoIdentidadDueño,
         "indiceMascota": indiceMascotaGeneral,
         "documentoIdentidadEspecialista": documentoIdentidadEspecialista,
         "fecha": fecha,
@@ -116,13 +131,34 @@ def añadirTurnoCliente(informacionTurno, listTurnosProgramados):
 
 def modificarTurnoCliente(listTurnosProgramados, diccClientesGuardados, diccProfesionalesGuardados):
     
-    documentoIdentidad = input("DNI del cliente: ")
-    while documentoIdentidad not in diccClientesGuardados.keys():
+    documentoIdentidadDueño = input("DNI del cliente: ")
+    while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
-        documentoIdentidad = input("DNI del cliente: ")
+        decision = input("Ingrese: [1] Ingresar DNI nuevamente, [2] Regresar al menu\n:")
 
-    # Filtrar los turnos que sean del cliente
-    turnosCliente = [turno for turno in listTurnosProgramados if turno['documentoIdentidadCliente'] == documentoIdentidad]
+        if decision == "1":
+            documentoIdentidadDueño = input("DNI del cliente: ")
+        
+        #terminar el flujo y volver al menu
+        elif decision == "2":
+            print("--------------------------------------------------------------------------------")
+            print("Volviendo al menu...")
+            print("--------------------------------------------------------------------------------")
+            return
+        
+        else:
+            print("Ha seleccionado una opcion incorrecta.")
+
+
+    fecha_actual = datetime.now()
+
+    # Filtrar los turnos que sean del cliente, que no esten cancelados y que sean posteriores a la fecha actual
+    turnosCliente = [
+    turno for turno in listTurnosProgramados 
+    if turno['documentoIdentidadCliente'] == documentoIdentidadDueño 
+    and turno["activo"] == True 
+    and datetime.strptime(turno['fecha'], "%d/%m/%Y") >= fecha_actual
+    ]
 
     if not turnosCliente:
         print("Este cliente no tiene turnos asignados.")
@@ -180,7 +216,6 @@ def modificarTurnoCliente(listTurnosProgramados, diccClientesGuardados, diccProf
             horarioFin = int(horarios[8:10])
 
             horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFin)]
-            print(horariosDisponibles)
 
             for turno in listTurnosProgramados:
                 if turno['fecha'] == nuevaFecha and turno['documentoIdentidadEspecialista'] == turnoSeleccionado['documentoIdentidadEspecialista']:
@@ -242,7 +277,6 @@ def modificarTurnoCliente(listTurnosProgramados, diccClientesGuardados, diccProf
 
         elif opcion == 0:
             # Salir del bucle
-            print("Saliendo de las modificaciones...")
             break
 
         else:
@@ -280,6 +314,7 @@ def guardarTurnoModificado(informacionTurnoModificado, listTurnosProgramados):
     return
 
 def cancelarTurnoCliente(listTurnosProgramados, diccClientesGuardados):
+
     documentoIdentidadCliente = input("DNI del cliente: ")
     while documentoIdentidadCliente not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
@@ -296,7 +331,7 @@ def cancelarTurnoCliente(listTurnosProgramados, diccClientesGuardados):
             print("Ha seleccionado una opcion incorrecta.")
     
     #filtrar los turnos que sean del cliente
-    turnosCliente = [turno for turno in listTurnosProgramados if turno['documentoIdentidadCliente'] == documentoIdentidadCliente]
+    turnosCliente = [turno for turno in listTurnosProgramados if turno['documentoIdentidadCliente'] == documentoIdentidadCliente and turno["activo" == True]]
 
     if not turnosCliente:
         print("Este cliente no tiene turnos asignados.")
