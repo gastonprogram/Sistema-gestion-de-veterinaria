@@ -16,13 +16,11 @@ def informacionMascotaNueva(diccClientesGuardados):
             #buscar otro cliente
             documentoIdentidadDueño = input("DNI del dueño: ")
         
-            
         #agregar un nuevo cliente
         elif decision == "2":
             informacionCliente = informacionClienteNuevo(diccClientesGuardados)
             if informacionCliente:
                 guardarCliente(informacionCliente, diccClientesGuardados)
-            print("Nuevo cliente agregado exitosamente.")
             return 
         
         #volver al menu
@@ -42,7 +40,6 @@ def informacionMascotaNueva(diccClientesGuardados):
         nombre = input("Nombre del animal: ")
 
     especie = input("Especie: ")
-
     raza = input("Raza: ")
 
     #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
@@ -73,8 +70,6 @@ def guardarMascotaNueva(informacionMascota, listMascotasGuardadas):
 #solicitar informacion para modificar una mascota existente
 def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuardadas):
     
-
-
     documentoIdentidadDueño = input("DNI del dueño: ")
     while documentoIdentidadDueño not in diccClientesGuardados.keys():
         print("El DNI no se encuentra registrado.")
@@ -84,7 +79,6 @@ def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuar
 
         #buscar otro cliente
         if decision == "1":
-            #buscar otro cliente
             documentoIdentidadDueño = input("DNI del dueño: ")
         
         #agregar un nuevo cliente
@@ -144,7 +138,7 @@ def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuar
         fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
 
 
-    pesoKilogramos = input("Peso en kilogramos: ")
+    pesoKilogramos = float(input("Peso en kilogramos: "))
     return documentoIdentidadDueño, indiceMascotaGeneral, nombre, especie, raza, fechaNacimiento, pesoKilogramos
 
 #guardar informacion modificada de una mascota existente
