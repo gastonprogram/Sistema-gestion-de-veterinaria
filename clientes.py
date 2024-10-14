@@ -23,7 +23,7 @@ def informacionClienteNuevo(diccClientesGuardados):
     #solicitar el nombre completo y verificar que sea correcto
     nombreCompleto = input("Nombre completo: ")
     patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
-    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto > 60):
+    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto) > 60:
         print("El formato o longitud es incorrecto.")
     nombreCompleto = nombreCompleto.lower()
     nombreCompleto = nombreCompleto.title()

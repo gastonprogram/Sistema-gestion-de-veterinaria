@@ -346,6 +346,11 @@ def main():
                         añadirTurnoCliente(infoTurnoNuevo, turnosProgramados)
 
 
+                if opcion_turnos == "2":
+
+                    modificarTurnoCliente(turnosProgramados, clientesGuardados, profesionalesGuardados)
+
+
                 elif opcion_turnos == "0":  # Volver al menú principal
                     break
 
@@ -382,6 +387,9 @@ def main():
 
 
                     mostrarTurnosPorFecha(turnosProgramados, fechaInicio, fechaFinal)
+                
+                elif opcion_turnos == "0":  # Volver al menú principal
+                    break
             
         elif opcion_principal == "0":
             print("Saliendo del sistema...")

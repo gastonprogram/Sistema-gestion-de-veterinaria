@@ -37,7 +37,7 @@ def informacionMascotaNueva(diccClientesGuardados):
     #solicitar el nombre de la mascota y verificar sea correcto
     nombre = input("Nombre del animal: ")
     patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
-    while not re.match(patronNombre, nombre) or len(nombre > 60):
+    while not re.match(patronNombre, nombre) or len(nombre) > 60:
         print("El formato o longitud es incorrecto.")
         nombre = input("Nombre del animal: ")
 
@@ -128,7 +128,7 @@ def modificarInformacionMascotaExistente(diccClientesGuardados, listMascotasGuar
     
     nombre = input("Nombre del animal: ")
     patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
-    while not re.match(patronNombre, nombre) or len(nombre > 60):
+    while not re.match(patronNombre, nombre) or len(nombre) > 60:
         print("El formato o longitud es incorrecto.")
         nombre = input("Nombre del animal: ")
 

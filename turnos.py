@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccProfesionalesGuardados, listTurnosProgramados):
     #solicitar el DNI del cliente
@@ -39,41 +40,53 @@ def informacionTurnoCliente(diccClientesGuardados, listMascotasGuardadas, diccPr
     
     #seleccionar especialista
     documentoIdentidadEspecialista = input("Ingrese el DNI del especialista: ")
+    while documentoIdentidadEspecialista not in diccProfesionalesGuardados.keys() or diccProfesionalesGuardados[documentoIdentidadEspecialista]["activo"] == False:
+        print("El DNI del especialista no se encuentra registrado.")
+        documentoIdentidadEspecialista = input("Ingrese el DNI del especialista: ")
 
     #obtener y separar el horario del profesional 
     horarios = diccProfesionalesGuardados[documentoIdentidadEspecialista]["horarioAtencion"]
     horarioInicio = int(horarios[:2])  
     horarioFinal = int(horarios[8:10])  
 
-    # Crear una lista con todos los horarios en formato HH:00 en del rango de atencion del especialista
+    #crear una lista con todos los horarios en formato HH:00 en el rango de atencion 
     horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFinal)]
 
 
-    #seleccionar la fecha
-    fecha = input("Fecha (DD/MM/AAAA): ")
+    #seleccionar la fecha y verificar que este correcta
     patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    while not re.match(patronFecha, fecha):
-        print("El formato o la fecha es incorrecta.")
+    while True:
         fecha = input("Fecha (DD/MM/AAAA): ")
+        
+        if re.match(patronFecha, fecha):
+            fecha_ingresada = datetime.strptime(fecha, "%d/%m/%Y")
+            #fecha actual
+            fecha_actual = datetime.now()
 
+            if fecha_ingresada > fecha_actual:
+                break
+            else:
+                print("La fecha ingresada es anterior a la fecha actual. Intente de nuevo.")
+        else:
+            print("El formato o la fecha es incorrecta. Intente de nuevo")
 
-    # Filtrar los horarios que ya estan ocupados
+    #filtrar los horarios que ya estan ocupados
     for turno in listTurnosProgramados:
         if turno['fecha'] == fecha and turno['documentoIdentidadEspecialista'] == documentoIdentidadEspecialista:
             if turno['horario'] in horariosDisponibles:
                 horariosDisponibles.remove(turno['horario'])
 
-    # Mostrar los horarios disponibles al usuario 
+    #mostrar los horarios disponibles al usuario 
     print("Horarios disponibles:")
     for i, horario in enumerate(horariosDisponibles):
         print(f"[{i + 1}] {horario}")
 
-    # Seleccionar un horario disponible con opción numerica
+    #seleccionar un horario disponible con opción numerica
     seleccion = int(input("Seleccione una opción de horario: "))
     while seleccion < 1 or seleccion > len(horariosDisponibles):
         seleccion = int(input("Seleccione una opción válida: "))
 
-    # Asignar el horario seleccionado
+    #asignar el horario seleccionado
     horarioSeleccionado = horariosDisponibles[seleccion - 1]
             
         
@@ -100,7 +113,7 @@ def añadirTurnoCliente(informacionTurno, listTurnosProgramados):
 
     return
 
-def modificarTurno(listTurnosProgramados, diccClientesGuardados, diccProfesionalesGuardados):
+def modificarTurnoCliente(listTurnosProgramados, diccClientesGuardados, diccProfesionalesGuardados):
     
     documentoIdentidad = input("DNI del cliente: ")
     while documentoIdentidad not in diccClientesGuardados.keys():
@@ -135,18 +148,58 @@ def modificarTurno(listTurnosProgramados, diccClientesGuardados, diccProfesional
         print("[2] Horario")
         print("[3] Especialista")
         print("[4] Motivo")
-        print("[0] Salir")
+        print("[0] Terminar")
         opcion = int(input("Seleccione una opción: "))
 
         # Modificar el campo seleccionado
         if opcion == 1:
-            nuevaFecha = input("Ingrese la nueva fecha (DD/MM/AAAA): ")
+            
             patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-            while not re.match(patronFecha, nuevaFecha):
-                print("El formato o la fecha es incorrecta.")
+            
+            #seleccionar la fecha y verificar que este correcta
+            nuevaFecha = ""
+            while True:
                 nuevaFecha = input("Ingrese la nueva fecha (DD/MM/AAAA): ")
+                
+                if re.match(patronFecha, nuevaFecha):
+                    fecha_ingresada = datetime.strptime(nuevaFecha, "%d/%m/%Y")
+                    #fecha actual
+                    fecha_actual = datetime.now()
+
+                    if fecha_ingresada > fecha_actual:
+                        break
+                    else:
+                        print("La fecha ingresada es anterior a la fecha actual. Intente de nuevo.")
+                else:
+                    print("El formato o la fecha es incorrecta. Intente de nuevo")
+
+
+            horarios = diccProfesionalesGuardados[turnoSeleccionado['documentoIdentidadEspecialista']]["horarioAtencion"]
+            horarioInicio = int(horarios[:2])
+            horarioFin = int(horarios[8:10])
+
+            horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFin)]
+            print(horariosDisponibles)
+
+            for turno in listTurnosProgramados:
+                if turno['fecha'] == nuevaFecha and turno['documentoIdentidadEspecialista'] == turnoSeleccionado['documentoIdentidadEspecialista']:
+                    print(turno['fecha'])
+                    if turno['horario'] in horariosDisponibles:
+                        print(turno['horario'])
+                        horariosDisponibles.remove(turno['horario'])
+
+            # Mostrar horarios disponibles
+            print("Horarios disponibles:")
+            for i, horario in enumerate(horariosDisponibles):
+                print(f"[{i + 1}] {horario}")
+            
+            seleccion = int(input("Seleccione un nuevo horario: "))
+            while seleccion < 1 or seleccion > len(horariosDisponibles):
+                seleccion = int(input("Seleccione una opción válida: "))
+
             turnoSeleccionado['fecha'] = nuevaFecha
-            print("Fecha modificada correctamente.")
+            turnoSeleccionado['horario'] = horariosDisponibles[seleccion - 1]
+            print("Fecha y horario modificado correctamente.")
 
         elif opcion == 2:
             horarios = diccProfesionalesGuardados[turnoSeleccionado['documentoIdentidadEspecialista']]["horarioAtencion"]
@@ -196,13 +249,32 @@ def modificarTurno(listTurnosProgramados, diccClientesGuardados, diccProfesional
     
     print("Modificaciones finalizadas.")
 
-
+    
+    documentoIdentidadCliente = turnoSeleccionado['documentoIdentidadCliente']
+    indiceMascota = turnoSeleccionado['indiceMascota']
     fechaFinal = turnoSeleccionado["fecha"]
     especialistaFinal = turnoSeleccionado["documentoIdentidadEspecialista"]
     horarioFinal = turnoSeleccionado["horario"]
     motivoFinal = turnoSeleccionado["motivo"]
-    
 
+    return indiceGeneralTurno, documentoIdentidadCliente, indiceMascota, fechaFinal, especialistaFinal, horarioFinal, motivoFinal
 
+def guardarTurnoModificado(informacionTurnoModificado, listTurnosProgramados):
+    indiceGeneralTurno, documentoIdentidadCliente, indiceMascota, fecha, especialista, horario, motivo = informacionTurnoModificado
 
-    return indiceGeneralTurno, fechaFinal, especialistaFinal, horarioFinal, motivoFinal
+    listTurnosProgramados[indiceGeneralTurno] = {
+        "documentoIdentidadCliente": documentoIdentidadCliente,
+        "indiceMascota": indiceMascota,
+        "documentoIdentidadEspecialista": especialista,
+        "fecha": fecha,
+        "horario": horario,
+        "motivo": motivo
+    }
+
+    print("--------------------------------------------------------------------------------------")
+    print(f"Informacion del turno modificada con exito")
+    print(f"Fecha: {fecha}, Horario: {horario}, Especialista DNI: {especialista}, Motivo: {motivo}")
+    print("--------------------------------------------------------------------------------------")
+
+    return
+
