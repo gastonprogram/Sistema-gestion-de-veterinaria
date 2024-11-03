@@ -1,0 +1,200 @@
+[
+    {
+        "documentoIdentidadCliente": "30111222",
+        "indiceMascota": 0,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "10/10/2024",
+        "horario": "10:00",
+        "motivo": "Consulta general",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30222333",
+        "indiceMascota": 1,
+        "documentoIdentidadProfesional": "20222222",
+        "fecha": "11/10/2024",
+        "horario": "11:00",
+        "motivo": "Vacunación",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30333444",
+        "indiceMascota": 2,
+        "documentoIdentidadProfesional": "20233333",
+        "fecha": "12/10/2024",
+        "horario": "12:00",
+        "motivo": "Chequeo anual",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30444555",
+        "indiceMascota": 3,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "13/10/2024",
+        "horario": "13:00",
+        "motivo": "Consulta por alergias",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30555666",
+        "indiceMascota": 4,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "14/10/2024",
+        "horario": "14:00",
+        "motivo": "Control de peso",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30666777",
+        "indiceMascota": 5,
+        "documentoIdentidadProfesional": "20222222",
+        "fecha": "15/10/2024",
+        "horario": "09:00",
+        "motivo": "Consulta general",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30777888",
+        "indiceMascota": 6,
+        "documentoIdentidadProfesional": "20233333",
+        "fecha": "16/10/2024",
+        "horario": "10:00",
+        "motivo": "Vacunación",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30888999",
+        "indiceMascota": 7,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "17/10/2024",
+        "horario": "11:00",
+        "motivo": "Chequeo anual",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30999000",
+        "indiceMascota": 8,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "18/10/2024",
+        "horario": "12:00",
+        "motivo": "Consulta por alergias",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30100111",
+        "indiceMascota": 9,
+        "documentoIdentidadProfesional": "20222222",
+        "fecha": "19/10/2024",
+        "horario": "13:00",
+        "motivo": "Control de peso",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "31000222",
+        "indiceMascota": 0,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "20/10/2024",
+        "horario": "14:00",
+        "motivo": "Consulta general",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "31111333",
+        "indiceMascota": 1,
+        "documentoIdentidadProfesional": "20233333",
+        "fecha": "21/10/2024",
+        "horario": "09:00",
+        "motivo": "Vacunación",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "31222444",
+        "indiceMascota": 2,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "22/10/2024",
+        "horario": "10:00",
+        "motivo": "Chequeo anual",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "31333555",
+        "indiceMascota": 3,
+        "documentoIdentidadProfesional": "20222222",
+        "fecha": "23/10/2024",
+        "horario": "11:00",
+        "motivo": "Consulta por alergias",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "31444666",
+        "indiceMascota": 4,
+        "documentoIdentidadProfesional": "20233333",
+        "fecha": "24/10/2024",
+        "horario": "12:00",
+        "motivo": "Control de peso",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30111222",
+        "indiceMascota": 5,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "25/10/2024",
+        "horario": "13:00",
+        "motivo": "Consulta general",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30222333",
+        "indiceMascota": 6,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "26/10/2024",
+        "horario": "14:00",
+        "motivo": "Vacunación",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30333444",
+        "indiceMascota": 7,
+        "documentoIdentidadProfesional": "20222222",
+        "fecha": "27/10/2024",
+        "horario": "09:00",
+        "motivo": "Chequeo anual",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30444555",
+        "indiceMascota": 8,
+        "documentoIdentidadProfesional": "20233333",
+        "fecha": "28/10/2024",
+        "horario": "10:00",
+        "motivo": "Consulta por alergias",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30555666",
+        "indiceMascota": 9,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "29/10/2024",
+        "horario": "11:00",
+        "motivo": "Control de peso",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30111222",
+        "indiceMascota": 0,
+        "documentoIdentidadProfesional": "20255555",
+        "fecha": "30/11/2024",
+        "horario": "14:00",
+        "motivo": "control",
+        "activo": true
+    },
+    {
+        "documentoIdentidadCliente": "30111222",
+        "indiceMascota": 1,
+        "documentoIdentidadProfesional": "20221111",
+        "fecha": "30/11/2024",
+        "horario": "09:00",
+        "motivo": "control general",
+        "activo": false
+    }
+]
