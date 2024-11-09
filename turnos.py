@@ -2,6 +2,34 @@ import re
 from datetime import datetime
 from utiles import verificarDocumento
 import json
+from utiles import *
+
+
+
+def mostrarInformacionTurnos(rutaArchivoTurnosProgramados):
+    
+    try:
+        archivoLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
+        turnosProgramados = json.load(archivoLeer)
+        archivoLeer.close()
+        
+        for turno in turnosProgramados:
+            print(f"\nCliente (DNI): {turno['documentoIdentidadCliente']}")
+            print(f"Mascota (Índice): {turno['indiceMascota']}  |  Profesional (DNI): {turno['documentoIdentidadProfesional']}")
+            print(f"Fecha: {turno['fecha']}  |  Horario: {turno['horario']}  |  Motivo: {turno['motivo']}  |  Estado: {'Activo' if turno['activo'] else 'Cancelado'}")
+            print("-" * 60)
+        
+    except FileNotFoundError:
+        print("No se ha encontrado el archivo.")
+    
+    finally:
+        try:
+            archivoLeer.close()
+            
+        except:
+            pass
+
+
 
 def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGuardados, rutaArchivoProfesionalGuardados, rutaArchivoTurnosProgramados):
 
@@ -25,21 +53,17 @@ def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGua
         - motivo(str): motivo de la consulta
     """
 
-
-    
     documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadCliente == -1:
         return
     elif documentoIdentidadCliente == False:
         return
     
-    
     archivoMascotasLeer = open(rutaArchivoMascotasGuardados, "r", encoding = "utf-8")
     mascotasGuardadas = json.load(archivoMascotasLeer)
     archivoMascotasLeer.close()
     
     mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadCliente]
-
 
     if not mascotasCliente:
         print("Este cliente no tiene mascotas registradas.")
@@ -245,10 +269,13 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
             print("Entrada no valida. Por favor, ingrese un número.")
 
     turnoSeleccionado = turnosCliente[indiceTurno]
+    
+    """
     indiceGeneralTurno = turnosGuardados.index(turnoSeleccionado)
     
     
     indiceMascota = turnoSeleccionado['indiceMascota']
+    """
 
 
 
@@ -265,108 +292,57 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
         # Modificar el campo seleccionado
         if opcion == 1:
             
-            patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
             
-            #seleccionar la fecha y verificar que este correcta
-            while True:
-                nuevaFecha = input("Ingrese la nueva fecha (DD/MM/AAAA): ")
-                
-                if re.match(patronFecha, nuevaFecha):
-                    fecha_ingresada = datetime.strptime(nuevaFecha, "%d/%m/%Y")
-                    #fecha actual
-                    fecha_actual = datetime.now()
-
-                    if fecha_ingresada > fecha_actual:
-                        break
-                    else:
-                        print("La fecha ingresada es anterior a la fecha actual. Intente de nuevo.")
-                else:
-                    print("El formato o la fecha es incorrecta. Intente de nuevo")
-
+            #modificar fecha
+            nuevaFecha = ingresarFecha()
             turnoSeleccionado['fecha'] = nuevaFecha
             
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)
             archivoTurnosEscribir.close()
             
+            
+            #modificar horario
             archivoLeerProfesionales = open(rutaArchivoProfesionalGuardados, "r", encoding = "utf-8")
             profesionalesGuardados = json.load(archivoLeerProfesionales)
             archivoLeerProfesionales.close()
 
-            horarios = profesionalesGuardados[turnoSeleccionado['documentoIdentidadProfesional']]["horarioAtencion"]
-            horarioInicio = int(horarios[:2])
-            horarioFin = int(horarios[8:10])
-
-            horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFin)]
-
-            for turno in turnosGuardados:
-                if turno['fecha'] == nuevaFecha and turno['documentoIdentidadProfesional'] == turnoSeleccionado['documentoIdentidadProfesional']:
-                    print(turno['fecha'])
-                    if turno['horario'] in horariosDisponibles:
-                        print(turno['horario'])
-                        horariosDisponibles.remove(turno['horario'])
-
-            # Mostrar horarios disponibles
-            print("Horarios disponibles:")
-            for i, horario in enumerate(horariosDisponibles):
-                print(f"[{i}] {horario}")
-            
-            seleccion = int(input("Seleccione un nuevo horario: "))
-            while seleccion < 0 or seleccion >= len(horariosDisponibles):
-                seleccion = int(input("Seleccione una opción válida: "))
-
-            turnoSeleccionado['horario'] = horariosDisponibles[seleccion]
-            
+            nuevoHorario = seleccionarHorario(turnosGuardados, turnoSeleccionado, profesionalesGuardados)
+            turnoSeleccionado['horario'] = nuevoHorario
             
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)
-            archivoTurnosEscribir.close()  
+            archivoTurnosEscribir.close()
             
             print("Fecha y horario modificado correctamente.")
 
         elif opcion == 2:
 
+            #modificar horario
             archivoLeerProfesionales = open(rutaArchivoProfesionalGuardados, "r", encoding = "utf-8")
             profesionalesGuardados = json.load(archivoLeerProfesionales)
             archivoLeerProfesionales.close()
 
-            horarios = profesionalesGuardados[turnoSeleccionado['documentoIdentidadProfesional']]["horarioAtencion"]
-            horarioInicio = int(horarios[:2])
-            horarioFin = int(horarios[8:10])
-
-            horariosDisponibles = [f"{hora:02d}:00" for hora in range(horarioInicio, horarioFin)]
-
-            for turno in turnosGuardados:
-                if turno['fecha'] == turnoSeleccionado['fecha'] and turno['documentoIdentidadProfesional'] == turnoSeleccionado['documentoIdentidadProfesional']:
-                    if turno['horario'] in horariosDisponibles:
-                        horariosDisponibles.remove(turno['horario'])
-
-            # Mostrar horarios disponibles
-            print("Horarios disponibles:")
-            for i, horario in enumerate(horariosDisponibles):
-                print(f"[{i}] {horario}")
-            
-            seleccion = int(input("Seleccione un nuevo horario: "))
-            while seleccion < 0 or seleccion >= len(horariosDisponibles):
-                seleccion = int(input("Seleccione una opción válida: "))
-
-            turnoSeleccionado['horario'] = horariosDisponibles[seleccion]
+            nuevoHorario = seleccionarHorario(turnosGuardados, turnoSeleccionado, profesionalesGuardados)
+            turnoSeleccionado['horario'] = nuevoHorario
             
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)
-            archivoTurnosEscribir.close()  
-            
+            archivoTurnosEscribir.close()
+                        
             print("Horario modificado correctamente.")
 
 
         elif opcion == 3:
 
+            #modificar profesional
             archivoProfesionalesLeer = open(rutaArchivoProfesionalGuardados, "r", encoding="utf-8")
             profesionalesGuardados = json.load(archivoProfesionalesLeer)
             archivoProfesionalesLeer.close()
             
-            # Filtrar profesionales activos
+            # filtrar profesionales activos
             profesionalesActivos = [(dni, profesional) for dni, profesional in profesionalesGuardados.items() if profesional['activo']]
+            print(profesionalesActivos)
 
             print("------------------------------------------------------------------------------------------------------------------")
             print("Información de especialistas:")
@@ -375,7 +351,7 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
                 print(f"[{i}] DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}, Horario de atención: {profesional['horarioAtencion']}.")
             print("------------------------------------------------------------------------------------------------------------------")
 
-            # Seleccionar especialista por índice
+            # seleccionar profesional por índice
             while True:
                 try:
                     indiceProfesional = int(input("Seleccione el profesional: "))
@@ -389,13 +365,15 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
                 except ValueError:
                     print("Entrada no valida. Por favor, ingrese un número.")
                     
-            documentoIdentidadProfesional, profesionalSeleccionado = profesionalesActivos[indiceProfesional]
+            documentoIdentidadProfesional = profesionalesActivos[indiceProfesional][0]
+            print(documentoIdentidadProfesional)
             turnoSeleccionado['documentoIdentidadProfesional'] = documentoIdentidadProfesional
             
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)
             archivoTurnosEscribir.close()  
 
+            """
             patronFecha = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
             
             #seleccionar la fecha y verificar que este correcta
@@ -413,9 +391,12 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
                         print("La fecha ingresada es anterior a la fecha actual. Intente de nuevo.")
                 else:
                     print("El formato o la fecha es incorrecta. Intente de nuevo")
+                    """
                     
+            nuevaFecha = ingresarFecha()
             turnoSeleccionado['fecha'] = nuevaFecha
             
+            """
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)
             archivoTurnosEscribir.close() 
@@ -444,11 +425,11 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
             
             seleccion = int(input("Seleccione un nuevo horario: "))
             while seleccion < 0 or seleccion >= len(horariosDisponibles):
-                seleccion = int(input("Seleccione una opción válida: "))
+                seleccion = int(input("Seleccione una opción válida: "))"""
 
             
-            
-            turnoSeleccionado['horario'] = horariosDisponibles[seleccion]
+            nuevoHorario = seleccionarHorario(turnosGuardados, turnoSeleccionado, profesionalesGuardados)
+            turnoSeleccionado['horario'] = nuevoHorario
             
             archivoTurnosEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
             json.dump(turnosGuardados, archivoTurnosEscribir, indent = 4, ensure_ascii = False)

@@ -1,5 +1,9 @@
+import json
+from utiles import *
+
+
 """TURNOS POR PROFESIONAL"""
-def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuardados):
+def desplegarTurnosPorProfesional(rutaArchivoTurnosProgramados, rutaArchivoProfesionalGuardados):
 
     """
     Muestra los turnos asignados a un profesional en especifico
@@ -14,36 +18,51 @@ def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuarda
     SALIDA:
     None: La función no retorna ningún valor. """
 
+    archivoProfesionalesLeer = open(rutaArchivoProfesionalGuardados, "r", encoding="utf-8")
+    profesionalesGuardados = json.load(archivoProfesionalesLeer)
+    archivoProfesionalesLeer.close()
 
-    for dni, profesional in diccProfesionalesGuardados.items():
+    # Filtrar profesionales activos
+    profesionalesActivos = [(dni, profesional) for dni, profesional in profesionalesGuardados.items() if profesional['activo']]
 
-        #verificar si el profesional esta activo y mostrar informacion clave
-        if profesional["activo"] == True:
-            print(f"DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}.")
-    
-    documentoIdentidadProfesional = input("Ingrese el DNI del profesional para ver sus turnos: ")
-    while documentoIdentidadProfesional not in diccProfesionalesGuardados.keys():
-        print("El DNI no se encuentra registrado.")
-        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
-        if decision == "1":
-            documentoIdentidadProfesional = input("Ingrese el DNI del profesional para ver sus turnos: ")
-        #terminar el flujo y volver al menu
-        elif decision == "2":
-            print("-" * 50)
-            print("Volviendo al menu...")
-            print("-" * 50)
-            return
-        else:
-            print("Ha seleccionado una opcion incorrecta.")
+    print("------------------------------------------------------------------------------------------------------------------")
+    print("Información de especialistas:")
+    for i, (dni, profesional) in enumerate(profesionalesActivos):
+        # Mostrar información clave de cada profesional para seleccionar por índice
+        print(f"[{i}] DNI: {dni}, Nombre: {profesional['nombreCompleto']}, Especialización: {profesional['especializacion']}, Horario de atención: {profesional['horarioAtencion']}.")
+    print("------------------------------------------------------------------------------------------------------------------")
+
+    # Seleccionar especialista por índice
+    while True:
+        try:
+            indiceProfesional = int(input("Seleccione el profesional: "))
+            
+            if indiceProfesional < 0:
+                print("El indice no puede ser negativo. Por favor, intenta de nuevo.")
+            elif indiceProfesional >= len(profesionalesActivos):
+                print(f"El indice debe estar entre 0 y {len(profesionalesActivos) - 1}. Por favor, intenta de nuevo.")
+            else:
+                break  # indice valido
+        except ValueError:
+            print("Entrada no valida. Por favor, ingrese un número.")
+
+    # acceder al profesional seleccionado
+    documentoIdentidadProfesional = profesionalesActivos[indiceProfesional][0]
+
+
+    archivoTurnosLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
+    turnosProgramados = json.load(archivoTurnosLeer)
+    archivoTurnosLeer.close()
+
 
     # Filtrar turnos por el especialista (DNI)
-    turnosEspecialista = [turno for turno in listTurnosProgramados if turno['documentoIdentidadEspecialista'] == documentoIdentidadProfesional and turno["activo"] == True]
-    if not turnosEspecialista:
+    turnosProfesional = [turno for turno in turnosProgramados if turno['documentoIdentidadEspecialista'] == documentoIdentidadProfesional and turno["activo"] == True]
+    if not turnosProfesional:
         print(f"No se encontraron turnos para el profesional con DNI {documentoIdentidadProfesional}.")
         return
     else:
         print(f"Turnos para el profesional con DNI {documentoIdentidadProfesional}:")
-        for cont, turno in enumerate(turnosEspecialista, 1):
+        for cont, turno in enumerate(turnosProfesional, 1):
             print(f"Turno : {cont}")
             print("-------------------------------------------------------------------------------------------------------------")
             print(f"Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota: {turno['indiceMascota']}, "
@@ -51,7 +70,7 @@ def desplegarTurnosPorProfesional(listTurnosProgramados, diccProfesionalesGuarda
     return
 
 """TURNOS POR MASCOTA"""
-def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados, diccClientesGuardados):
+def desplegarTurnosPorMascota(rutaArchivoMascotasGuardados, rutaArchivoTurnosProgramados, rutaArchivoClientesGuardados):
 
 
 
@@ -68,48 +87,62 @@ def desplegarTurnosPorMascota(listMascotasGuardadas, listTurnosProgramados, dicc
     None: La función no retorna ningún valor. """
 
 
-    documentoIdentidadDueño = input("Ingrese el DNI del dueño para ver sus turnos: ")
-    while documentoIdentidadDueño not in diccClientesGuardados.keys():
-        print("El DNI no se encuentra registrado.")
-        decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menu\nElegir una opcion: ")
-        if decision == "1":
-            documentoIdentidadDueño = input("Ingrese el DNI del dueño para ver sus turnos: ")
-        #terminar el flujo y volver al menu
-        elif decision == "2":
-            print("--------------------------------------------------------------------------------")
-            print("Volviendo al menu...")
-            print("--------------------------------------------------------------------------------")
-            return
-        else:
-            print("Opción no válida.")
-            print("="*50)
+    documentoIdentidadDueño = verificarDocumento(rutaArchivoClientesGuardados, True)
+    if documentoIdentidadDueño == -1:
+        return
+    elif documentoIdentidadDueño == False:
+        return
+    
+    
+    
+    archivoMascotasLeer = open(rutaArchivoMascotasGuardados, "r", encoding = "utf-8")
+    mascotasGuardadas = json.load(archivoMascotasLeer)
+    archivoMascotasLeer.close()
+    
+    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadDueño]
 
-    # Filtrar mascota por el dueño (DNI)
-    mascotasCliente = [mascota for mascota in listMascotasGuardadas if mascota['documentoIdentidadDueño'] == documentoIdentidadDueño]
 
     if not mascotasCliente:
         print("Este cliente no tiene mascotas registradas.")
-        return
-                
+        return None
+    
     for i, mascota in enumerate(mascotasCliente):
-        print(f"[{i}] Nombre: {mascota['nombre']}, Tipo: {mascota['especie']}")
+        print(f"[{i}] Nombre: {mascota['nombre']}, Especie: {mascota['especie']}")
 
-    indiceMascotaCliente = int(input("Seleccione la mascota: "))
-    while indiceMascotaCliente > len(mascotasCliente) - 1 or indiceMascotaCliente < 0:
-        indiceMascotaCliente = int(input("Seleccione la mascota: "))
+    while True:
+        try:
+            indiceMascotaCliente = int(input("Seleccione la mascota: "))
+            
+            if indiceMascotaCliente < 0:
+                print("El indice no puede ser negativo. Por favor, intenta de nuevo.")
+            elif indiceMascotaCliente >= len(mascotasCliente):
+                print(f"El índice debe estar entre 0 y {len(mascotasCliente) - 1}. Por favor, intenta de nuevo.")
+            else:
+                break  
+        except ValueError:
+            print("Entrada no válida. Por favor, ingrese un número.")
 
     mascotaSeleccionada = mascotasCliente[indiceMascotaCliente]
-    indiceMascotaGeneral = listMascotasGuardadas.index(mascotaSeleccionada)
+    indiceMascotaGeneral = mascotasGuardadas.index(mascotaSeleccionada)
+    
+    
+    archivoTurnosLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
+    turnosProgramados = json.load(archivoTurnosLeer)
+    archivoTurnosLeer.close()
+    
+    archivoMascotasLeer = open(rutaArchivoMascotasGuardados, "r", encoding = "utf-8")
+    mascotasGuardadas = json.laod(archivoMascotasLeer)
+    archivoMascotasLeer.close()
 
-    for turno in listTurnosProgramados:
+    for turno in turnosProgramados:
         if turno["activo"] == True:
             if indiceMascotaGeneral == turno["indiceMascota"]:
                 print("-------------------------------------------------------------------------------------------------------------")
-                print(f"Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota: {listMascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
+                print(f"Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota: {mascotasGuardadas[indiceMascotaGeneral]['nombre']}, "
                                 f"Fecha: {turno['fecha']}, Hora: {turno['horario']}, Motivo: {turno['motivo']}")
     return
 
-def mostrarTurnosPorFecha(listTurnosProgramados, fechaInicio, fechaFin):
+def mostrarTurnosPorFecha(rutaArchivoTurnosProgramados, fechaInicio, fechaFin):
 
     """
     Muestra los turnos dentro de un rango de fechas especifico
@@ -124,15 +157,27 @@ def mostrarTurnosPorFecha(listTurnosProgramados, fechaInicio, fechaFin):
     None: La función no retorna ningún valor. """
 
 
+    archivoTurnosLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
+    turnosProgramados = json.load(archivoTurnosLeer)
+    archivoTurnosLeer.close()
 
     print(f"Turnos entre {fechaInicio} y {fechaFin}:")
-    for turno in listTurnosProgramados:
+    
+    fechaInicio = datetime.strptime(fechaInicio, "%d/%m/%Y")
+    fechaFin = datetime.strptime(fechaFin, "%d/%m/%Y")
+    
+    for turno in turnosProgramados:
         if turno["activo"] == True:
-            if turno['fecha'] >= fechaInicio and turno['fecha'] <= fechaFin:
-                print(f"Fecha: {turno['fecha']}, Horario: {turno['horario']}, Cliente DNI: {turno['documentoIdentidadCliente']}")
+            fechaTurno = datetime.strptime(turno["fecha"], "%d/%m/%Y")
+            if fechaInicio <= fechaTurno <= fechaFin:
+                print(f"\nCliente (DNI): {turno['documentoIdentidadCliente']}")
+                print(f"Mascota (Índice): {turno['indiceMascota']}  |  Profesional (DNI): {turno['documentoIdentidadProfesional']}")
+                print(f"Fecha: {turno['fecha']}  |  Horario: {turno['horario']}  |  Motivo: {turno['motivo']}  |  Estado: {'Activo' if turno['activo'] else 'Cancelado'}")
+                print("-" * 60)
+                
     return
 
-def mostrarTurnosPorFechaYHorarios(listTurnosProgramados, fecha, horarioInicio, horarioFin):
+def mostrarTurnosPorFechaYHorarios(rutaArchivoTurnosProgramados, fecha, horarioInicio, horarioFin):
 
     """
     Muestra los turnos en una fecha en especifico dentro de un rango de horarios
@@ -146,14 +191,21 @@ def mostrarTurnosPorFechaYHorarios(listTurnosProgramados, fecha, horarioInicio, 
 
     SALIDA:
     None: La función no retorna ningún valor. """
+    
+    archivoTurnosLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
+    turnosProgramados = json.load(archivoTurnosLeer)
+    archivoTurnosLeer.close()
+
 
     print(f"Turnos para el {fecha} entre {horarioInicio} y {horarioFin}:")
-    for turno in listTurnosProgramados:
+    for turno in turnosProgramados:
         if turno["activo"] == True:
             if turno['fecha'] == fecha:
                 #obtener la hora del turno en formato HH
                 horaTurno = int(turno['horario'][:2]) 
-                if horarioInicio <= horaTurno < horarioFin:
-                    print(f"Horario: {turno['horario']}, Cliente DNI: {turno['documentoIdentidadCliente']}, Mascota Índice: {turno['indiceMascota']}, Especialista DNI: {turno['documentoIdentidadEspecialista']}, Motivo: {turno['motivo']}")
-
+                if int(horarioInicio) <= horaTurno < int(horarioFin):
+                    print(f"\nCliente (DNI): {turno['documentoIdentidadCliente']}")
+                    print(f"Mascota (Índice): {turno['indiceMascota']}  |  Profesional (DNI): {turno['documentoIdentidadProfesional']}")
+                    print(f"Fecha: {turno['fecha']}  |  Horario: {turno['horario']}  |  Motivo: {turno['motivo']}  |  Estado: {'Activo' if turno['activo'] else 'Cancelado'}")
+                    print("-" * 60)
     return

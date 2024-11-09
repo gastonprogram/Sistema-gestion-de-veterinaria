@@ -1,6 +1,32 @@
 from clientes import *
 from utiles import *
 
+
+def mostrarInformacionMascotas(rutaArchivoMascotasGuardadas):
+    
+    try:
+        archivoLeer = open(rutaArchivoMascotasGuardadas, "r", encoding="utf-8")
+        mascotasGuardadas = json.load(archivoLeer)
+        archivoLeer.close()
+        
+        for mascota in mascotasGuardadas:
+            print(f"\nDueño (DNI): {mascota['documentoIdentidadDueño']}")
+            print(f"Nombre: {mascota['nombre']}  |  Especie: {mascota['especie']}  |  Raza: {mascota['raza']}")
+            print(f"Fecha de Nacimiento: {mascota['fechaNacimiento']}  |  Peso: {mascota['pesoKilogramos']} kg")
+            print("-" * 50)
+            
+    except FileNotFoundError:
+        print("No se ha encontrado el archivo.")
+    
+    finally:
+        try:
+            archivoLeer.close()
+            
+        except:
+            pass
+
+
+
 #tomar informacion de mascota nueva
 def informacionMascotaNueva(rutaArchivoClientesGuardados):
 
@@ -38,11 +64,7 @@ def informacionMascotaNueva(rutaArchivoClientesGuardados):
     raza = input("Raza: ")
 
     #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
-    fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
-    patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    while not re.match(patronFechaNacimiento, fechaNacimiento):
-        print("El formato o la fecha es incorrecta.")
-        fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
+    fechaNacimiento = ingresarFechaNacimiento()
     
     
     pesoKilogramos = float(input("Peso en kilogramos: "))
@@ -87,6 +109,7 @@ def guardarMascotaNueva(informacionMascota, rutaArchivoMascotasGuardados):
         
     except FileNotFoundError:
         print("El archivo no fue encontrado")
+        
     return
 
 
@@ -166,17 +189,13 @@ def modificarInformacionMascotaExistente(rutaArchivoClientesGuardados, rutaArchi
 
 
     especie = input("Especie: ")
+    
     raza = input("Raza: ")
 
     
-    fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
-    patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    while not re.match(patronFechaNacimiento, fechaNacimiento):
-        print("El formato o la fecha es incorrecta.")
-        fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
+    fechaNacimiento = ingresarFechaNacimiento()
 
     pesoKilogramos = float(input("Peso en kilogramos: "))
-
 
     return indiceMascotaGeneral, documentoIdentidadDueño, nombre, especie, raza, fechaNacimiento, pesoKilogramos
 

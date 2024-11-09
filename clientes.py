@@ -2,6 +2,35 @@ import re
 import json
 from utiles import *
 
+
+
+
+#mostrar informacion de cada cliente
+def mostrarInformacionClientes(rutaArchivoClientesGuardados):
+    
+    try:
+        archivoLeer = open(rutaArchivoClientesGuardados, "r", encoding="utf-8")
+        clientesGuardados = json.load(archivoLeer)
+        archivoLeer.close()
+        
+        for dni, datos in clientesGuardados.items():
+            print(f"\nDNI: {dni}")
+            print(f"Nombre Completo: {datos['nombreCompleto']}  |  Género: {datos['genero']}  |  Fecha de Nacimiento: {datos['fechaNacimiento']}")
+            print(f"Teléfono: {datos['numeroTelefono']}  |  Domicilio: {datos['domicilio']}")
+            print("-" * 50)
+        
+    except FileNotFoundError:
+        print("No se ha encontrado el archivo.")
+    
+    finally:
+        try:
+            archivoLeer.close()
+            
+        except:
+            pass
+
+
+
 #tomar informacion sobre un cliente nuevo
 def informacionClienteNuevo(rutaArchivoClientesGuardados):
     """
@@ -32,30 +61,19 @@ def informacionClienteNuevo(rutaArchivoClientesGuardados):
         
         
     #solicitar el nombre completo y verificar que sea correcto
-    nombreCompleto = input("Nombre completo: ")
-    patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
-    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto) > 60:
-        print("El formato o longitud es incorrecto.")
-        nombreCompleto = input("Nombre completo: ")
-    nombreCompleto = nombreCompleto.lower()
-    nombreCompleto = nombreCompleto.title()
+    nombreCompleto = ingresarNombre()
     
 
-    genero = input("Genero (masculino/femenino): ")
+    
+    #solicitar el genero y verificar que sea correcto
+    genero = elegirGenero()
+
 
     #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
-    fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
-    patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    while not re.match(patronFechaNacimiento, fechaNacimiento):
-        print("El formato o la fecha es incorrecta.")
-        fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
+    fechaNacimiento = ingresarFechaNacimiento()
 
     #solicitar el numero de telefono y confirmar que sea correcto 
-    numeroTelefono = input("Numero de telefono: ")
-    patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
-    while not re.match(patronNumeroTel, numeroTelefono):
-        print("El formato o el numero es incorrecto.")
-        numeroTelefono = input("Numero de telefono: ")
+    numeroTelefono = ingresarNumeroTelefono()
 
     domicilio = input("Domicilio: ")
     
@@ -161,28 +179,15 @@ def modificarInformacionCliente(rutaArchivoClientesGuardados):
     
 
     #solicitar el nombre completo y verificar que sea correcto
-    nombreCompleto = input("Nombre completo: ")
-    patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
-    while not re.match(patronNombre, nombreCompleto) or len(nombreCompleto) > 60:
-        print("El formato o longitud es incorrecto.")
-    nombreCompleto = nombreCompleto.lower()
-    nombreCompleto = nombreCompleto.title()
+    nombreCompleto = ingresarNombre()
     
-    genero = input("Genero (masculino/femenino): ")
+    genero = elegirGenero()
 
     #solicitar la fecha de nacimiento y verificar que la fecha sea correcta
-    fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
-    patronFechaNacimiento = "^(0[1-9]|[12]\d|3[01])/(0[13578]|1[02])/(19\d{2}|20\d{2})$|^(0[1-9]|[12]\d|30)/(0[13456789]|1[012])/(19\d{2}|20\d{2})$|^(0[1-9]|1\d|2[0-8])/02/(19\d{2}|20\d{2})$|^29/02/(19([02468][048]|[13579][26])|20([02468][048]|[13579][26]))$"
-    while not re.match(patronFechaNacimiento, fechaNacimiento):
-        print("El formato o la fecha es incorrecta.")
-        fechaNacimiento = input("Fecha de Nacimiento (DD/MM/AAAA): ")
+    fechaNacimiento = ingresarFechaNacimiento()
 
     #solicitar el numero de telefono y confirmar que sea correcto 
-    numeroTelefono = input("Numero de telefono: ")
-    patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
-    while not re.match(patronNumeroTel, numeroTelefono):
-        print("El formato o el numero es incorrecto.")
-        numeroTelefono = input("Numero de telefono: ")
+    numeroTelefono = ingresarNumeroTelefono()
 
     domicilio = input("Domicilio: ")
 

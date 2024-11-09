@@ -156,7 +156,7 @@
         "documentoIdentidadCliente": "30333444",
         "indiceMascota": 7,
         "documentoIdentidadProfesional": "20222222",
-        "fecha": "27/10/2024",
+        "fecha": "27/11/2024",
         "horario": "09:00",
         "motivo": "Chequeo anual",
         "activo": true
@@ -165,7 +165,7 @@
         "documentoIdentidadCliente": "30444555",
         "indiceMascota": 8,
         "documentoIdentidadProfesional": "20233333",
-        "fecha": "28/10/2024",
+        "fecha": "28/11/2024",
         "horario": "10:00",
         "motivo": "Consulta por alergias",
         "activo": true
@@ -174,7 +174,7 @@
         "documentoIdentidadCliente": "30555666",
         "indiceMascota": 9,
         "documentoIdentidadProfesional": "20255555",
-        "fecha": "29/10/2024",
+        "fecha": "29/11/2024",
         "horario": "11:00",
         "motivo": "Control de peso",
         "activo": true
@@ -184,7 +184,7 @@
         "indiceMascota": 0,
         "documentoIdentidadProfesional": "20255555",
         "fecha": "30/11/2024",
-        "horario": "14:00",
+        "horario": "09:00",
         "motivo": "control",
         "activo": true
     },
@@ -195,6 +195,6 @@
         "fecha": "30/11/2024",
         "horario": "09:00",
         "motivo": "control general",
-        "activo": false
+        "activo": true
     }
 ]
