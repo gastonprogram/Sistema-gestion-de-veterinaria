@@ -1,0 +1,154 @@
+[
+    {
+        "documentoIdentidadDueño": "30111222",
+        "nombre": "Max",
+        "especie": "Perro",
+        "raza": "Labrador",
+        "fechaNacimiento": "01/01/2020",
+        "pesoKilogramos": 30.5
+    },
+    {
+        "documentoIdentidadDueño": "30111222",
+        "nombre": "Bella",
+        "especie": "Perro",
+        "raza": "Bulldog",
+        "fechaNacimiento": "15/05/2019",
+        "pesoKilogramos": 25.0
+    },
+    {
+        "documentoIdentidadDueño": "30222333",
+        "nombre": "Whiskers",
+        "especie": "Gato",
+        "raza": "Siamés",
+        "fechaNacimiento": "22/07/2021",
+        "pesoKilogramos": 5.0
+    },
+    {
+        "documentoIdentidadDueño": "30222333",
+        "nombre": "Fluffy",
+        "especie": "Gato",
+        "raza": "Persa",
+        "fechaNacimiento": "10/10/2020",
+        "pesoKilogramos": 7.0
+    },
+    {
+        "documentoIdentidadDueño": "30222333",
+        "nombre": "Rocky",
+        "especie": "Perro",
+        "raza": "Caniche",
+        "fechaNacimiento": "18/08/2018",
+        "pesoKilogramos": 10.0
+    },
+    {
+        "documentoIdentidadDueño": "30333444",
+        "nombre": "Mittens",
+        "especie": "Gato",
+        "raza": "Maine Coon",
+        "fechaNacimiento": "12/02/2019",
+        "pesoKilogramos": 8.0
+    },
+    {
+        "documentoIdentidadDueño": "30333444",
+        "nombre": "Buddy",
+        "especie": "Perro",
+        "raza": "Golden Retriever",
+        "fechaNacimiento": "05/04/2017",
+        "pesoKilogramos": 35.0
+    },
+    {
+        "documentoIdentidadDueño": "30444555",
+        "nombre": "Ginger",
+        "especie": "Gato",
+        "raza": "Bengala",
+        "fechaNacimiento": "30/09/2022",
+        "pesoKilogramos": 4.5
+    },
+    {
+        "documentoIdentidadDueño": "30555666",
+        "nombre": "Rex",
+        "especie": "Perro",
+        "raza": "Pastor Alemán",
+        "fechaNacimiento": "14/11/2018",
+        "pesoKilogramos": 40.0
+    },
+    {
+        "documentoIdentidadDueño": "30666777",
+        "nombre": "Nina",
+        "especie": "Gato",
+        "raza": "Persa",
+        "fechaNacimiento": "23/03/2023",
+        "pesoKilogramos": 4.0
+    },
+    {
+        "documentoIdentidadDueño": "30777888",
+        "nombre": "Charlie",
+        "especie": "Perro",
+        "raza": "Bulldog",
+        "fechaNacimiento": "08/12/2020",
+        "pesoKilogramos": 28.0
+    },
+    {
+        "documentoIdentidadDueño": "30888999",
+        "nombre": "Simba",
+        "especie": "Gato",
+        "raza": "Siamés",
+        "fechaNacimiento": "19/01/2021",
+        "pesoKilogramos": 6.5
+    },
+    {
+        "documentoIdentidadDueño": "30999000",
+        "nombre": "Coco",
+        "especie": "Perro",
+        "raza": "Chihuahua",
+        "fechaNacimiento": "15/07/2019",
+        "pesoKilogramos": 3.0
+    },
+    {
+        "documentoIdentidadDueño": "31000222",
+        "nombre": "Luna",
+        "especie": "Gato",
+        "raza": "Maine Coon",
+        "fechaNacimiento": "20/08/2022",
+        "pesoKilogramos": 7.5
+    },
+    {
+        "documentoIdentidadDueño": "31111333",
+        "nombre": "Rocky",
+        "especie": "Perro",
+        "raza": "Beagle",
+        "fechaNacimiento": "12/12/2020",
+        "pesoKilogramos": 12.0
+    },
+    {
+        "documentoIdentidadDueño": "31222444",
+        "nombre": "Toby",
+        "especie": "Perro",
+        "raza": "Buldog Francés",
+        "fechaNacimiento": "01/05/2019",
+        "pesoKilogramos": 9.0
+    },
+    {
+        "documentoIdentidadDueño": "31333555",
+        "nombre": "Sasha",
+        "especie": "Gato",
+        "raza": "Siamés",
+        "fechaNacimiento": "17/02/2023",
+        "pesoKilogramos": 4.2
+    },
+    {
+        "documentoIdentidadDueño": "31444666",
+        "nombre": "Oscar",
+        "especie": "Perro",
+        "raza": "Cocker Spaniel",
+        "fechaNacimiento": "25/06/2021",
+        "pesoKilogramos": 10.5
+    },
+    {
+        "documentoIdentidadDueño": "47111222",
+        "nombre": "Abril",
+        "especie": "Perro",
+        "raza": "Border Collie",
+        "fechaNacimiento": "24/06/2024",
+        "pesoKilogramos": 13.5
+    }
+]

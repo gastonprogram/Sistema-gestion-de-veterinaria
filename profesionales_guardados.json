@@ -1,0 +1,62 @@
+{
+    "20221111": {
+        "nombreCompleto": "Pedro Alvarez",
+        "genero": "Masculino",
+        "especializacion": "Veterinario",
+        "fechaNacimiento": "15/04/1985",
+        "domicilio": "Calle de la Salud 123",
+        "numeroTelefono": "+5491161234567",
+        "horarioAtencion": "09:00 - 17:00",
+        "activo": true
+    },
+    "20222222": {
+        "nombreCompleto": "Ana López",
+        "genero": "Femenino",
+        "especializacion": "Veterinaria especializada en felinos",
+        "fechaNacimiento": "25/12/1990",
+        "domicilio": "Av. de los Gatos 456",
+        "numeroTelefono": "+5491162345678",
+        "horarioAtencion": "10:00 - 18:00",
+        "activo": true
+    },
+    "20233333": {
+        "nombreCompleto": "Carlos Ramirez",
+        "genero": "Masculino",
+        "especializacion": "Veterinario especializado en caninos",
+        "fechaNacimiento": "05/06/1988",
+        "domicilio": "Calle Canina 789",
+        "numeroTelefono": "+5491163456789",
+        "horarioAtencion": "08:00 - 16:00",
+        "activo": true
+    },
+    "20244444": {
+        "nombreCompleto": "Sofía Martínez",
+        "genero": "Femenino",
+        "especializacion": "Veterinaria general",
+        "fechaNacimiento": "14/02/1992",
+        "domicilio": "Calle de los Animales 321",
+        "numeroTelefono": "+5491164567890",
+        "horarioAtencion": "11:00 - 19:00",
+        "activo": false
+    },
+    "20255555": {
+        "nombreCompleto": "Jorge Torres",
+        "genero": "Masculino",
+        "especializacion": "Veterinario cirujano",
+        "fechaNacimiento": "30/10/1980",
+        "domicilio": "Av. de la Medicina 654",
+        "numeroTelefono": "+5491165678901",
+        "horarioAtencion": "07:00 - 15:00",
+        "activo": true
+    },
+    "20266666": {
+        "nombreCompleto": "Ariel Perez",
+        "genero": "Masculino",
+        "especializacion": "Veterinario",
+        "fechaNacimiento": "19/09/1991",
+        "domicilio": "Recoleta",
+        "numeroTelefono": "+54 119804821",
+        "horarioAtencion": "10:00 - 19:00",
+        "activo": false
+    }
+}
