@@ -11,7 +11,6 @@ def mostrarInformacionTurnos(rutaArchivoTurnosProgramados):
     try:
         archivoLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
         turnosProgramados = json.load(archivoLeer)
-        archivoLeer.close()
         
         for turno in turnosProgramados:
             print(f"\nCliente (DNI): {turno['documentoIdentidadCliente']}")
@@ -28,7 +27,6 @@ def mostrarInformacionTurnos(rutaArchivoTurnosProgramados):
             
         except:
             pass
-
 
 
 def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGuardados, rutaArchivoProfesionalGuardados, rutaArchivoTurnosProgramados):
@@ -226,7 +224,6 @@ def añadirTurnoCliente(informacionTurno, rutaArchivoTurnosProgramados):
     try:
         archivoLeer = open(rutaArchivoTurnosProgramados, "r", encoding="utf-8")
         turnosGuardados = json.load(archivoLeer)
-        archivoLeer.close()
     
     except FileNotFoundError:
         print("No se ha encontrado el archivo.")

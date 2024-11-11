@@ -11,7 +11,6 @@ def mostrarInformacionClientes(rutaArchivoClientesGuardados):
     try:
         archivoLeer = open(rutaArchivoClientesGuardados, "r", encoding="utf-8")
         clientesGuardados = json.load(archivoLeer)
-        archivoLeer.close()
         
         for dni, datos in clientesGuardados.items():
             print(f"\nDNI: {dni}")

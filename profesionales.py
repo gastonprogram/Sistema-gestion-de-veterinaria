@@ -9,7 +9,6 @@ def mostrarInformacionProfesional(rutaArchivoProfesionalGuardados):
     try:
         archivoLeer = open(rutaArchivoProfesionalGuardados, "r", encoding="utf-8")
         profesionalesGuardados = json.load(archivoLeer)
-        archivoLeer.close()
         
         
         for dni, datos in profesionalesGuardados.items():

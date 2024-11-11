@@ -78,7 +78,6 @@ def elegirGenero() -> str :
     
     return genero
 
-
 def ingresarNombre() -> str:
     patronNombre = "^[^\W\d_]+(\s[^\W\d_]+)*$"
     
@@ -151,7 +150,6 @@ def ingresarFecha():
                 print("La fecha ingresada es anterior a la fecha actual. Intente de nuevo.")
         else:
             print("El formato o la fecha es incorrecta. Intente de nuevo.")
-
 
 def seleccionarHorario(turnosGuardados, turnoSeleccionado, profesionalesGuardados):
     """
