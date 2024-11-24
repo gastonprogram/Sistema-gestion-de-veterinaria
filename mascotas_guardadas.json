@@ -5,7 +5,8 @@
         "especie": "Perro",
         "raza": "Labrador",
         "fechaNacimiento": "01/01/2020",
-        "pesoKilogramos": 30.5
+        "pesoKilogramos": 30.5,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30111222",
@@ -13,7 +14,8 @@
         "especie": "Perro",
         "raza": "Bulldog",
         "fechaNacimiento": "15/05/2019",
-        "pesoKilogramos": 25.0
+        "pesoKilogramos": 25.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30222333",
@@ -21,7 +23,8 @@
         "especie": "Gato",
         "raza": "Siamés",
         "fechaNacimiento": "22/07/2021",
-        "pesoKilogramos": 5.0
+        "pesoKilogramos": 5.0,
+        "activo": false
     },
     {
         "documentoIdentidadDueño": "30222333",
@@ -29,7 +32,8 @@
         "especie": "Gato",
         "raza": "Persa",
         "fechaNacimiento": "10/10/2020",
-        "pesoKilogramos": 7.0
+        "pesoKilogramos": 7.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30222333",
@@ -37,7 +41,8 @@
         "especie": "Perro",
         "raza": "Caniche",
         "fechaNacimiento": "18/08/2018",
-        "pesoKilogramos": 10.0
+        "pesoKilogramos": 10.0,
+        "activo": false
     },
     {
         "documentoIdentidadDueño": "30333444",
@@ -45,7 +50,8 @@
         "especie": "Gato",
         "raza": "Maine Coon",
         "fechaNacimiento": "12/02/2019",
-        "pesoKilogramos": 8.0
+        "pesoKilogramos": 8.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30333444",
@@ -53,7 +59,8 @@
         "especie": "Perro",
         "raza": "Golden Retriever",
         "fechaNacimiento": "05/04/2017",
-        "pesoKilogramos": 35.0
+        "pesoKilogramos": 35.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30444555",
@@ -61,7 +68,8 @@
         "especie": "Gato",
         "raza": "Bengala",
         "fechaNacimiento": "30/09/2022",
-        "pesoKilogramos": 4.5
+        "pesoKilogramos": 4.5,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30555666",
@@ -69,7 +77,8 @@
         "especie": "Perro",
         "raza": "Pastor Alemán",
         "fechaNacimiento": "14/11/2018",
-        "pesoKilogramos": 40.0
+        "pesoKilogramos": 40.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30666777",
@@ -77,7 +86,8 @@
         "especie": "Gato",
         "raza": "Persa",
         "fechaNacimiento": "23/03/2023",
-        "pesoKilogramos": 4.0
+        "pesoKilogramos": 4.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30777888",
@@ -85,7 +95,8 @@
         "especie": "Perro",
         "raza": "Bulldog",
         "fechaNacimiento": "08/12/2020",
-        "pesoKilogramos": 28.0
+        "pesoKilogramos": 28.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30888999",
@@ -93,7 +104,8 @@
         "especie": "Gato",
         "raza": "Siamés",
         "fechaNacimiento": "19/01/2021",
-        "pesoKilogramos": 6.5
+        "pesoKilogramos": 6.5,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "30999000",
@@ -101,7 +113,8 @@
         "especie": "Perro",
         "raza": "Chihuahua",
         "fechaNacimiento": "15/07/2019",
-        "pesoKilogramos": 3.0
+        "pesoKilogramos": 3.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "31000222",
@@ -109,7 +122,8 @@
         "especie": "Gato",
         "raza": "Maine Coon",
         "fechaNacimiento": "20/08/2022",
-        "pesoKilogramos": 7.5
+        "pesoKilogramos": 7.5,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "31111333",
@@ -117,7 +131,8 @@
         "especie": "Perro",
         "raza": "Beagle",
         "fechaNacimiento": "12/12/2020",
-        "pesoKilogramos": 12.0
+        "pesoKilogramos": 12.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "31222444",
@@ -125,7 +140,8 @@
         "especie": "Perro",
         "raza": "Buldog Francés",
         "fechaNacimiento": "01/05/2019",
-        "pesoKilogramos": 9.0
+        "pesoKilogramos": 9.0,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "31333555",
@@ -133,7 +149,8 @@
         "especie": "Gato",
         "raza": "Siamés",
         "fechaNacimiento": "17/02/2023",
-        "pesoKilogramos": 4.2
+        "pesoKilogramos": 4.2,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "31444666",
@@ -141,7 +158,8 @@
         "especie": "Perro",
         "raza": "Cocker Spaniel",
         "fechaNacimiento": "25/06/2021",
-        "pesoKilogramos": 10.5
+        "pesoKilogramos": 10.5,
+        "activo": true
     },
     {
         "documentoIdentidadDueño": "47111222",
@@ -149,6 +167,25 @@
         "especie": "Perro",
         "raza": "Border Collie",
         "fechaNacimiento": "24/06/2024",
-        "pesoKilogramos": 13.5
+        "pesoKilogramos": 13.5,
+        "activo": true
+    },
+    {
+        "documentoIdentidadDueño": "31444666",
+        "nombre": "pepito",
+        "especie": "gato",
+        "raza": "tricolor",
+        "fechaNacimiento": "27/07/2020",
+        "pesoKilogramos": 6.0,
+        "activo": false
+    },
+    {
+        "documentoIdentidadDueño": "31666888",
+        "nombre": "Cesar",
+        "especie": "Perro",
+        "raza": "Pastor Alemna",
+        "fechaNacimiento": "06/08/2009",
+        "pesoKilogramos": 20.7,
+        "activo": true
     }
 ]

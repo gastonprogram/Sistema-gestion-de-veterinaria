@@ -21,7 +21,7 @@ def verificarDocumento(_rutaArchivo: str, _repetido: bool):
     while True:
         documentoIdentidad = input("Ingrese DNI: ")
         
-        if documentoIdentidad in registrosGuardados:
+        if documentoIdentidad in registrosGuardados and registrosGuardados[documentoIdentidad]["activo"]:
             if not _repetido:
                 print("DNI ya registrado.")
                 res = menuDecision()
@@ -38,7 +38,6 @@ def verificarDocumento(_rutaArchivo: str, _repetido: bool):
             else:
                 return documentoIdentidad
 
-
 def menuDecision():
     while True:
         decision = input("Seleccione:\n[1] Ingresar DNI nuevamente\n[2] Regresar al menú\nElegir una opción: ")
@@ -52,7 +51,6 @@ def menuDecision():
             return -1
         else:
             print("Ha seleccionado una opción incorrecta.")
-
 
 def elegirGenero() -> str :
     
@@ -119,7 +117,7 @@ def ingresarFechaNacimiento() -> str:
         
     return fechaNacimiento
 
-def ingresarNumeroTelefono() -> str:
+def ingresarNumeroTelefono():
     patronNumeroTel = "^\+?(\d{1,4})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
     
     while True:
@@ -129,8 +127,11 @@ def ingresarNumeroTelefono() -> str:
             if not re.match(patronNumeroTel, numeroTelefono):
                 print("El formato o el numero es incorrecto.")
                 print("Intente nuevamente.")
+            else:
+                break
         except:
             pass
+    return numeroTelefono
         
 def ingresarFecha():
     

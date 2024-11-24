@@ -2,9 +2,6 @@ import re
 import json
 from utiles import *
 
-
-
-
 #mostrar informacion de cada cliente
 def mostrarInformacionClientes(rutaArchivoClientesGuardados):
     
@@ -29,8 +26,6 @@ def mostrarInformacionClientes(rutaArchivoClientesGuardados):
         except:
             pass
     return
-
-
 
 #tomar informacion sobre un cliente nuevo
 def informacionClienteNuevo(rutaArchivoClientesGuardados):
@@ -124,7 +119,8 @@ def guardarCliente(informacionCliente, rutaArchivoClientesGuardados):
             "genero": genero,
             "fechaNacimiento": fechaNacimiento,
             "numeroTelefono": numeroTelefono,
-            "domicilio": domicilio
+            "domicilio": domicilio,
+            "activo" : True
         }
 
         # vinculamos el dni con la informacion del cliente
@@ -224,3 +220,104 @@ def modificarInformacionCliente(rutaArchivoClientesGuardados):
     domicilio = input("Domicilio: ")
 
     return documentoIdentidadCliente, nombreCompleto, genero, fechaNacimiento, numeroTelefono, domicilio
+
+#eliminar cliente existente
+def eliminarCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGuardadas):
+
+
+    """
+    Elimina/desactiva un  profesional existente en el sistema.
+    
+    PARAMETROS:
+    diccProfesionalesGuardados(dict): diccionario con los profesionales guardados:
+
+    SALIDA:
+    None: La función no retorna ningún valor.
+    """
+    
+    documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
+    if documentoIdentidadCliente == -1:
+        return
+    elif documentoIdentidadCliente == False:
+        return
+
+    #mostrar la informacion actual del profesional
+    print("=" * 60)
+    print("Informacion del cliente".center(60))
+    print("=" * 60)
+    
+    try:
+        archivoClientesLeer = open(rutaArchivoClientesGuardados, "r", encoding = "utf-8")
+        clientesGuardados = json.load(archivoClientesLeer)
+        
+    except FileNotFoundError:
+        print("El archivo no se encontro.")
+        return
+        
+    finally:
+        try:
+            archivoClientesLeer.close()
+            
+        except:
+            pass
+    
+    informacionActualCliente = clientesGuardados[documentoIdentidadCliente]
+    
+    print(f"Nombre completo: {informacionActualCliente['nombreCompleto']}\nGenero: {informacionActualCliente['genero']}\nFecha de nacimiento: {informacionActualCliente['fechaNacimiento']}\nTelefono: {informacionActualCliente['numeroTelefono']}\nDomicilio: {informacionActualCliente['domicilio']}")
+    print("=" * 60)
+
+    while True:
+        try:
+            confirmarEliminacion = input("¿Está seguro que desea eliminar el cliente? (y/n): ").lower()
+            
+            if confirmarEliminacion == "y":
+                
+                try:
+                    
+                    archivoMascotasLeer = open(rutaArchivoMascotasGuardadas, "r", encoding = "utf-8")
+                    mascotasGuardadas = json.load(archivoMascotasLeer)
+                    
+                    clientesGuardados[documentoIdentidadCliente]["activo"] = False
+                
+                    for mascota in mascotasGuardadas:
+                        if mascota["documentoIdentidadDueño"] == documentoIdentidadCliente:
+                            mascota["activo"] = False
+                    
+                    archivoClientesEscribir = open(rutaArchivoClientesGuardados, "w", encoding="utf-8")
+                    json.dump(clientesGuardados, archivoClientesEscribir, ensure_ascii=False, indent=4)
+                    
+                    archivoMascotasEscribir = open(rutaArchivoMascotasGuardadas, "w", encoding="utf-8")
+                    json.dump(mascotasGuardadas, archivoMascotasEscribir, ensure_ascii=False, indent=4)
+                    
+                except FileNotFoundError:
+                    print("El archivo no se encontro.")
+                    return
+                    
+                finally:
+                    try:
+                        archivoClientesEscribir.close()
+                        
+                        archivoMascotasEscribir.close()
+                        
+                    except:
+                        pass
+
+                print("-" * 50)
+                print("Se ha eliminado el cliente con éxito.")
+                print("-" * 50)
+                break  
+
+            elif confirmarEliminacion == "n":
+                print("-" * 50)
+                print("Se ha elegido cancelar la operación.")
+                print("-" * 50)
+                break  
+            
+            else:
+                print("Ha ingresado un valor incorrecto.")
+
+        except Exception as e:
+            print("Ocurrio un error durante el proceso:", e)
+            print("Intente nuevamente.")
+        
+    return

@@ -109,7 +109,8 @@ def guardarMascotaNueva(informacionMascota, rutaArchivoMascotasGuardados):
             "especie": especie,
             "raza": raza,
             "fechaNacimiento": fechaNacimiento,
-            "pesoKilogramos": pesoKilogramos
+            "pesoKilogramos": pesoKilogramos,
+            "activo" : True
         })
         
     try:
@@ -180,7 +181,7 @@ def modificarInformacionMascotaExistente(rutaArchivoClientesGuardados, rutaArchi
             pass
             
     
-    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadDueño]
+    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadDueño and m["activo"]]
 
 
     if not mascotasCliente:
@@ -226,7 +227,6 @@ def modificarInformacionMascotaExistente(rutaArchivoClientesGuardados, rutaArchi
     
     raza = input("Raza: ")
 
-    
     fechaNacimiento = ingresarFechaNacimiento()
 
     pesoKilogramos = float(input("Peso en kilogramos: "))
@@ -247,7 +247,8 @@ def guardarMascotaModificada(informacionMascota, rutaArchivoMascotasGuardados):
                 "especie": especie,
                 "raza": raza,
                 "fechaNacimiento": fechaNacimiento,
-                "pesoKilogramos": pesoKilogramos
+                "pesoKilogramos": pesoKilogramos,
+                "activo" : True
             }
     except FileNotFoundError:
         print("El archivo no fue encontrado")
@@ -279,4 +280,108 @@ def guardarMascotaModificada(informacionMascota, rutaArchivoMascotasGuardados):
             pass
     
     print(f"Mascota {nombre} modificada con éxito!")
+    return
+
+
+
+def eliminarMascota(rutaArchivoMascotasGuardados, rutaArchivoClientesGuardados):
+
+    
+    documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
+    if documentoIdentidadCliente == -1:
+        return
+    elif documentoIdentidadCliente == False:
+        return
+    
+    
+
+    try:
+        archivoMascotasLeer = open(rutaArchivoMascotasGuardados, "r", encoding="utf-8")
+        mascotasGuardadas = json.load(archivoMascotasLeer)
+        
+    except FileNotFoundError:
+            print("No se ha encontrado el archivo.")
+            return
+    finally:
+        try:
+            archivoMascotasLeer.close()
+        except:
+            pass
+            
+    
+    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadCliente and m["activo"]]
+
+    if not mascotasCliente:
+        print("Este cliente no tiene mascotas registradas.")
+        return None
+    
+    for i, mascota in enumerate(mascotasCliente):
+        print(f"[{i}] Nombre: {mascota['nombre']}, Especie: {mascota['especie']}")
+
+    while True:
+        try:
+            indiceMascotaCliente = int(input("Seleccione la mascota: "))
+            
+            if indiceMascotaCliente < 0:
+                print("El indice no puede ser negativo. Por favor, intenta de nuevo.")
+            elif indiceMascotaCliente >= len(mascotasCliente):
+                print(f"El índice debe estar entre 0 y {len(mascotasCliente) - 1}. Por favor, intenta de nuevo.")
+            else:
+                break  
+        except ValueError:
+            print("Entrada no válida. Por favor, ingrese un número.")
+
+    mascotaSeleccionada = mascotasCliente[indiceMascotaCliente]
+    indiceMascotaGeneral = mascotasGuardadas.index(mascotaSeleccionada)
+    
+    print("=" * 60)
+    print("Información de la mascota".center(60))
+    print("=" * 60)
+    
+    # Mostrar la información actual de la mascota
+    for k, v in mascotaSeleccionada.items():
+        print(f"{k}: {v}")
+    print("=" * 60)
+    
+    while True:
+        try:
+            confirmarEliminacion = input("¿Está seguro que desea eliminar la mascota? (y/n): ").lower()
+            
+            if confirmarEliminacion == "y":
+                
+                mascotasGuardadas[indiceMascotaGeneral]["activo"] = False
+                
+                try:
+                    
+                    archivoEscribir = open(rutaArchivoMascotasGuardados, "w", encoding="utf-8")
+                    json.dump(mascotasGuardadas, archivoEscribir, ensure_ascii=False, indent=4)
+                    
+                except FileNotFoundError:
+                    print("No se ha encontrado el archivo.")
+                    return
+                    
+                finally:
+                    try:
+                        archivoEscribir.close()
+                    except:
+                        pass
+
+                print("-" * 50)
+                print("Se ha cancelado el turno con éxito.")
+                print("-" * 50)
+                break  
+
+            elif confirmarEliminacion == "n":
+                print("-" * 50)
+                print("Se ha elegido cancelar la operación.")
+                print("-" * 50)
+                break  
+            
+            else:
+                print("Ha ingresado un valor incorrecto.")
+
+        except Exception as e:
+            print("Ocurrió un error durante el proceso:", e)
+            print("Intente nuevamente.")
+
     return

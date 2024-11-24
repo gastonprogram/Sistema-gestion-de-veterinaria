@@ -47,7 +47,7 @@
         "domicilio": "Av. de la Medicina 654",
         "numeroTelefono": "+5491165678901",
         "horarioAtencion": "07:00 - 15:00",
-        "activo": true
+        "activo": false
     },
     "20266666": {
         "nombreCompleto": "Ariel Perez",

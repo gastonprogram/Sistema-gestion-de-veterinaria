@@ -64,6 +64,7 @@ def main():
                 print(Fore.BLUE + "[1]" + Style.RESET_ALL + " Listar Clientes")
                 print(Fore.BLUE + "[2]" + Style.RESET_ALL + " Agregar Cliente")
                 print(Fore.BLUE + "[3]" + Style.RESET_ALL + " Modificar Cliente")
+                print(Fore.BLUE + "[4]" + Style.RESET_ALL + " Eliminar Cliente")
                 
                 print(Fore.CYAN + "="*40)
                 print(Fore.CYAN + "[0]"  + " Volver al menu principal")
@@ -93,7 +94,12 @@ def main():
                     #guardar la informacion del cliente a modificar en el diccionario
                     if informacionClienteModificar:
                         guardarCliente(informacionClienteModificar, archivoClientesGuardadosRuta)
+                        
+                elif opcion_clientes == "4": #eliminar cliente
 
+                    # se elimina el cliente elegido 
+                    eliminarCliente(archivoClientesGuardadosRuta,archivoMascotasGuardadasRuta)
+                    
                 elif opcion_clientes == "0":  # Volver al menú principal
                     break
         
@@ -106,6 +112,7 @@ def main():
                 print(Fore.GREEN + "[1]" + Style.RESET_ALL + " Listar Mascotas")
                 print(Fore.GREEN + "[2]" + Style.RESET_ALL + " Agregar Mascota")
                 print(Fore.GREEN + "[3]" + Style.RESET_ALL + " Modificar Mascota")
+                print(Fore.GREEN + "[4]" + Style.RESET_ALL + " Eliminar Mascota")
                 
                 print(Fore.CYAN + "="*40)
                 print(Fore.CYAN + "[0]" + " Volver al menu principal")
@@ -135,7 +142,11 @@ def main():
                     #guardar la informacion modificada sobre la mascota en la lista
                     if infoMascotaModificar:
                         guardarMascotaModificada(infoMascotaModificar, archivoMascotasGuardadasRuta)
+                        
+                elif opcion_mascotas == "4": #eliminar mascota
 
+                    # se elimina la mascota elegida 
+                    eliminarMascota(archivoMascotasGuardadasRuta, archivoClientesGuardadosRuta)
                 
                 elif opcion_mascotas == "0":  # Volver al menú principal
                     break

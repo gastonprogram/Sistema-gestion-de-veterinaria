@@ -4,111 +4,151 @@
         "genero": "Masculino",
         "fechaNacimiento": "15/03/1985",
         "numeroTelefono": "+5491167886543",
-        "domicilio": "Av. Corrientes 1234"
+        "domicilio": "Av. Corrientes 1234",
+        "activo": true
     },
     "30222333": {
         "nombreCompleto": "Maria Gonzalez",
         "genero": "Femenino",
         "fechaNacimiento": "22/07/1990",
         "numeroTelefono": "+5491167896543",
-        "domicilio": "Calle Falsa 123"
+        "domicilio": "Calle Falsa 123",
+        "activo": true
     },
     "30333444": {
         "nombreCompleto": "Carlos Lopez",
         "genero": "Masculino",
         "fechaNacimiento": "30/11/1978",
         "numeroTelefono": "+5491167886544",
-        "domicilio": "Calle Siempre Viva 742"
+        "domicilio": "Calle Siempre Viva 742",
+        "activo": true
     },
     "30444555": {
         "nombreCompleto": "Ana Martinez",
         "genero": "Femenino",
         "fechaNacimiento": "10/04/1989",
         "numeroTelefono": "+5491167896544",
-        "domicilio": "San Juan 456"
+        "domicilio": "San Juan 456",
+        "activo": true
     },
     "30555666": {
         "nombreCompleto": "Roberto Diaz",
         "genero": "Masculino",
         "fechaNacimiento": "01/02/1982",
         "numeroTelefono": "+5491167886545",
-        "domicilio": "Av. Libertador 4567"
+        "domicilio": "Av. Libertador 4567",
+        "activo": true
     },
     "30666777": {
         "nombreCompleto": "Laura Sanchez",
         "genero": "Femenino",
         "fechaNacimiento": "18/09/1991",
         "numeroTelefono": "+5491167896545",
-        "domicilio": "Av. Rivadavia 7890"
+        "domicilio": "Av. Rivadavia 7890",
+        "activo": true
     },
     "30777888": {
         "nombreCompleto": "Sofia Gutierrez",
         "genero": "Femenino",
         "fechaNacimiento": "05/12/1995",
         "numeroTelefono": "+5491167886546",
-        "domicilio": "Calle Mitre 123"
+        "domicilio": "Calle Mitre 123",
+        "activo": true
     },
     "30888999": {
         "nombreCompleto": "Luis Romero",
         "genero": "Masculino",
         "fechaNacimiento": "23/06/1976",
         "numeroTelefono": "+5491167896546",
-        "domicilio": "Pueyrredón 456"
+        "domicilio": "Pueyrredón 456",
+        "activo": true
     },
     "30999000": {
         "nombreCompleto": "Marta Fernandez",
         "genero": "Femenino",
         "fechaNacimiento": "11/05/1987",
         "numeroTelefono": "+5491167886547",
-        "domicilio": "Santa Fe 789"
+        "domicilio": "Santa Fe 789",
+        "activo": true
     },
     "30100111": {
         "nombreCompleto": "Jorge Alvarez",
         "genero": "Masculino",
         "fechaNacimiento": "20/01/1980",
         "numeroTelefono": "+5491167896547",
-        "domicilio": "Belgrano 1234"
+        "domicilio": "Belgrano 1234",
+        "activo": true
     },
     "31000222": {
         "nombreCompleto": "Julia Herrera",
         "genero": "Femenino",
         "fechaNacimiento": "27/03/1992",
         "numeroTelefono": "+5491167886548",
-        "domicilio": "Dorrego 5678"
+        "domicilio": "Dorrego 5678",
+        "activo": true
     },
     "31111333": {
         "nombreCompleto": "Diego Rodriguez",
         "genero": "Masculino",
         "fechaNacimiento": "13/10/1983",
         "numeroTelefono": "+5491167896548",
-        "domicilio": "Corrientes 912"
+        "domicilio": "Corrientes 912",
+        "activo": true
     },
     "31222444": {
         "nombreCompleto": "Patricia Castro",
         "genero": "Femenino",
         "fechaNacimiento": "30/06/1990",
         "numeroTelefono": "+5491167886549",
-        "domicilio": "Sarmiento 123"
+        "domicilio": "Sarmiento 123",
+        "activo": true
     },
     "31333555": {
         "nombreCompleto": "Oscar Ruiz",
         "genero": "Masculino",
         "fechaNacimiento": "08/11/1975",
         "numeroTelefono": "+5491167896549",
-        "domicilio": "Maipú 456"
+        "domicilio": "Maipú 456",
+        "activo": true
     },
     "31444666": {
         "nombreCompleto": "Carla Morales",
         "genero": "Femenino",
         "fechaNacimiento": "15/04/1993",
         "numeroTelefono": "+5491167886550",
-        "domicilio": "Alberdi 789"
+        "domicilio": "Alberdi 789",
+        "activo": true
     },
     "47111222": {
         "nombreCompleto": "Gaston Matias",
         "genero": "masculino",
         "fechaNacimiento": "21/06/2003",
         "numeroTelefono": "2944010101",
-        "domicilio": "lago puelo"
+        "domicilio": "lago puelo",
+        "activo": true
+    },
+    "47222222": {
+        "nombreCompleto": "Matias",
+        "genero": "Masculino",
+        "fechaNacimiento": "20/09/2000",
+        "numeroTelefono": "2944010101",
+        "domicilio": "lautaro",
+        "activo": true
+    },
+    "31555777": {
+        "nombreCompleto": "Leandro Rodriguez",
+        "genero": "Masculino",
+        "fechaNacimiento": "01/10/2000",
+        "numeroTelefono": "27849842014",
+        "domicilio": "Caballito",
+        "activo": false
+    },
+    "31666888": {
+        "nombreCompleto": "Marcos Ñartoño",
+        "genero": "Masculino",
+        "fechaNacimiento": "08/08/1980",
+        "numeroTelefono": "11892431",
+        "domicilio": "Av. Rivadavia 1902",
+        "activo": true
     }
 }

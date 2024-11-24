@@ -72,7 +72,7 @@ def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGua
         except:
             pass
     
-    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadCliente]
+    mascotasCliente = [m for m in mascotasGuardadas if m["documentoIdentidadDueño"] == documentoIdentidadCliente and m["activo"]]
 
     if not mascotasCliente:
         print("Este cliente no tiene mascotas registradas.")
@@ -172,6 +172,7 @@ def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGua
     try:
         archivoTurnosLeer = open(rutaArchivoTurnosProgramados, "r", encoding = "utf-8")
         turnosProgramados = json.load(archivoTurnosLeer)
+        
     except FileNotFoundError:
         print("No se ha encontrado el archivo.")
         return
