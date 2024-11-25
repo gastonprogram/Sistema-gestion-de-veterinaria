@@ -76,8 +76,8 @@ def desplegarTurnosPorProfesional(rutaArchivoTurnosProgramados, rutaArchivoProfe
             pass
 
 
-    # Filtrar turnos por el especialista (DNI)
-    turnosProfesional = [turno for turno in turnosProgramados if turno['documentoIdentidadEspecialista'] == documentoIdentidadProfesional and turno["activo"] == True]
+    # Filtrar turnos por el profesional (DNI)
+    turnosProfesional = [turno for turno in turnosProgramados if turno['documentoIdentidadProfesional'] == documentoIdentidadProfesional and turno["activo"] == True]
     if not turnosProfesional:
         print(f"No se encontraron turnos para el profesional con DNI {documentoIdentidadProfesional}.")
         return
@@ -107,7 +107,8 @@ def desplegarTurnosPorMascota(rutaArchivoMascotasGuardados, rutaArchivoTurnosPro
     SALIDA:
     None: La función no retorna ningún valor. """
 
-
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadDueño = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadDueño == -1:
         return

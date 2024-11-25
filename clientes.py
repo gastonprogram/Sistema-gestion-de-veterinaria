@@ -12,8 +12,8 @@ def mostrarInformacionClientes(rutaArchivoClientesGuardados):
         for dni, datos in clientesGuardados.items():
             print(f"\nDNI: {dni}")
             print(f"Nombre Completo: {datos['nombreCompleto']}  |  Género: {datos['genero']}  |  Fecha de Nacimiento: {datos['fechaNacimiento']}")
-            print(f"Teléfono: {datos['numeroTelefono']}  |  Domicilio: {datos['domicilio']}")
-            print("-" * 50)
+            print(f"Teléfono: {datos['numeroTelefono']}  |  Domicilio: {datos['domicilio']}  |  Activo: {'Sí' if datos['activo'] else 'No'}")
+            print("-" * 80)
         
     except FileNotFoundError:
         print("No se ha encontrado el archivo.")

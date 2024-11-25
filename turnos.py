@@ -50,7 +50,9 @@ def informacionTurnoCliente(rutaArchivoClientesGuardados, rutaArchivoMascotasGua
         - horarioSeleccionado (str): horario del turno
         - motivo(str): motivo de la consulta
     """
-
+    
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadCliente == -1:
         return
@@ -250,7 +252,7 @@ def añadirTurnoCliente(informacionTurno, rutaArchivoTurnosProgramados):
     try:
         # guardar los cambios en el archivo
         archivoEscribir = open(rutaArchivoTurnosProgramados, "w", encoding="utf-8")
-        json.dump(turnosGuardados, archivoEscribir, indent=4)
+        json.dump(turnosGuardados, archivoEscribir, ensure_ascii=False, indent=4)
         
         print(f"Turno agregado con éxito!")
         
@@ -269,6 +271,8 @@ def añadirTurnoCliente(informacionTurno, rutaArchivoTurnosProgramados):
 def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuardados, rutaArchivoProfesionalGuardados):
     
     
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadCliente == -1:
         return
@@ -472,7 +476,6 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
                     print("Entrada no valida. Por favor, ingrese un número.")
                     
             documentoIdentidadProfesional = profesionalesActivos[indiceProfesional][0]
-            print(documentoIdentidadProfesional)
             turnoSeleccionado['documentoIdentidadProfesional'] = documentoIdentidadProfesional
             
             try:
@@ -550,6 +553,8 @@ def modificarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuard
 def cancelarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuardados):
 
     
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadCliente == -1:
         return
@@ -609,7 +614,7 @@ def cancelarTurnoCliente(rutaArchivoTurnosProgramados, rutaArchivoClientesGuarda
     
     while True:
         try:
-            confirmarEliminacion = input("¿Está seguro que desea eliminar el profesional? (y/n): ").lower()
+            confirmarEliminacion = input("¿Está seguro que desea cancelar el turno? (y/n): ").lower()
             
             if confirmarEliminacion == "y":
                 

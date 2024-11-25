@@ -37,7 +37,7 @@
         "fechaNacimiento": "01/02/1982",
         "numeroTelefono": "+5491167886545",
         "domicilio": "Av. Libertador 4567",
-        "activo": true
+        "activo": false
     },
     "30666777": {
         "nombreCompleto": "Laura Sanchez",
@@ -150,5 +150,101 @@
         "numeroTelefono": "11892431",
         "domicilio": "Av. Rivadavia 1902",
         "activo": true
+    },
+    "31444667": {
+        "nombreCompleto": "Esteban González",
+        "genero": "Masculino",
+        "fechaNacimiento": "23/02/1986",
+        "numeroTelefono": "+5491156783456",
+        "domicilio": "Calle de los Álamos 456",
+        "activo": true
+    },
+    "31444668": {
+        "nombreCompleto": "María López",
+        "genero": "Femenino",
+        "fechaNacimiento": "17/09/1990",
+        "numeroTelefono": "+5491167881234",
+        "domicilio": "Avenida Independencia 789",
+        "activo": false
+    },
+    "31444669": {
+        "nombreCompleto": "Luis Méndez",
+        "genero": "Masculino",
+        "fechaNacimiento": "05/05/1988",
+        "numeroTelefono": "+5491176549876",
+        "domicilio": "Calle Roca 321",
+        "activo": true
+    },
+    "31444670": {
+        "nombreCompleto": "Paula Rodríguez",
+        "genero": "Femenino",
+        "fechaNacimiento": "09/08/1992",
+        "numeroTelefono": "+5491143217654",
+        "domicilio": "Calle San Lorenzo 654",
+        "activo": true
+    },
+    "31444671": {
+        "nombreCompleto": "Ricardo Pérez",
+        "genero": "Masculino",
+        "fechaNacimiento": "12/03/1984",
+        "numeroTelefono": "+5491134567890",
+        "domicilio": "Avenida Mitre 987",
+        "activo": true
+    },
+    "31444672": {
+        "nombreCompleto": "Carmen Díaz",
+        "genero": "Femenino",
+        "fechaNacimiento": "29/11/1995",
+        "numeroTelefono": "+5491167882345",
+        "domicilio": "Calle Belgrano 456",
+        "activo": true
+    },
+    "31444673": {
+        "nombreCompleto": "Hernán Fernández",
+        "genero": "Masculino",
+        "fechaNacimiento": "30/06/1987",
+        "numeroTelefono": "+5491178965432",
+        "domicilio": "Avenida San Martín 654",
+        "activo": true
+    },
+    "31444674": {
+        "nombreCompleto": "Lucía Torres",
+        "genero": "Femenino",
+        "fechaNacimiento": "15/01/1991",
+        "numeroTelefono": "+5491143218907",
+        "domicilio": "Calle Güemes 123",
+        "activo": false
+    },
+    "31444675": {
+        "nombreCompleto": "Santiago Ramírez",
+        "genero": "Masculino",
+        "fechaNacimiento": "21/12/1990",
+        "numeroTelefono": "+5491156782345",
+        "domicilio": "Avenida Callao 987",
+        "activo": true
+    },
+    "31444676": {
+        "nombreCompleto": "Rosa Herrera",
+        "genero": "Femenino",
+        "fechaNacimiento": "03/10/1983",
+        "numeroTelefono": "+5491123456789",
+        "domicilio": "Calle Sarmiento 789",
+        "activo": true
+    },
+    "31444677": {
+        "nombreCompleto": "Martín López",
+        "genero": "Masculino",
+        "fechaNacimiento": "28/07/1979",
+        "numeroTelefono": "+5491145673210",
+        "domicilio": "Calle Bolívar 456",
+        "activo": true
+    },
+    "31444678": {
+        "nombreCompleto": "Ana Méndez",
+        "genero": "Femenino",
+        "fechaNacimiento": "13/05/1989",
+        "numeroTelefono": "+5491167886789",
+        "domicilio": "Calle Alberdi 321",
+        "activo": false
     }
 }

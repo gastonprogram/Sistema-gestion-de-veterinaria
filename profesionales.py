@@ -3,8 +3,16 @@ from utiles import *
 #tomar informacion de un profesional nuevo
 
 
-
 def mostrarInformacionProfesional(rutaArchivoProfesionalGuardados):
+    """
+    Muestra la informacion de cada profesional guardado en el sistema
+    
+    PARAMETROS:
+    rutaArchivoProfesionalGuardados(str): ruta del archivo json la informacion de los profesionales guardados
+
+    SALIDA:
+    None: La función no retorna ningún valor.
+    """
     
     try:
         archivoLeer = open(rutaArchivoProfesionalGuardados, "r", encoding="utf-8")
@@ -36,7 +44,7 @@ def informacionProfesionalNuevo(rutaArchivoProfesionalGuardados):
     Solicita y valida la información de un nuevo profesional para agregarlo al sistema
     
     PARAMETROS:
-    diccProfesionalesGuardados(dict): diccionario con los profesionales guardados:
+    rutaArchivoProfesionalGuardados(str): ruta del archivo json la informacion de los profesionales guardados
 
     SALIDA:
         - documentoIdentidadProfesional (str): Número de DNI del profesional.
@@ -101,8 +109,7 @@ def guardarInformacionProfesional(informacionProfesional,rutaArchivoProfesionalG
         - domicilio (str): Domicilio del profesional. 
         - numeroTelefono (str): Número de teléfono del profesional.
         - horarioAtencion (str) : Rango de horario de atencion del profesional
-    diccProfesionalesGuardados(dict): diccionario con los profesionales guardados
-
+    rutaArchivoProfesionalGuardados(str): ruta del archivo json la informacion de los profesionales guardados
 
     SALIDA:
     None: La función no retorna ningún valor. """
@@ -168,7 +175,7 @@ def modificarInformacionProfesional(rutaArchivoProfesionalGuardados):
     Modifica la información de un profesional existente en el sistema.
     
     PARAMETROS:
-    diccProfesionalesGuardados(dict): diccionario con los profesionales guardados:
+    rutaArchivoProfesionalGuardados(str): ruta del archivo json la informacion de los profesionales guardados
 
     SALIDA:
         - documentoIdentidadProfesional (str): Número de DNI del profesional.
@@ -218,7 +225,7 @@ def modificarInformacionProfesional(rutaArchivoProfesionalGuardados):
     
     print(f"Nombre completo: {informacionActualprofesional['nombreCompleto']}\nGenero: {informacionActualprofesional['genero']}\nFecha de nacimiento: {informacionActualprofesional['fechaNacimiento']}\nTelefono: {informacionActualprofesional['numeroTelefono']}\nDomicilio: {informacionActualprofesional['domicilio']}")
     print("=" * 60)
-    
+
     
     nombreCompleto = ingresarNombre()
     
@@ -249,7 +256,7 @@ def eliminarProfesional(rutaArchivoProfesionalGuardados):
     Elimina/desactiva un  profesional existente en el sistema.
     
     PARAMETROS:
-    diccProfesionalesGuardados(dict): diccionario con los profesionales guardados:
+    rutaArchivoProfesionalGuardados(str): ruta del archivo json la informacion de los profesionales guardados
 
     SALIDA:
     None: La función no retorna ningún valor.

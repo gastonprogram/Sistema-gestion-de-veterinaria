@@ -12,6 +12,7 @@ def mostrarInformacionMascotas(rutaArchivoMascotasGuardadas):
             print(f"\nDueño (DNI): {mascota['documentoIdentidadDueño']}")
             print(f"Nombre: {mascota['nombre']}  |  Especie: {mascota['especie']}  |  Raza: {mascota['raza']}")
             print(f"Fecha de Nacimiento: {mascota['fechaNacimiento']}  |  Peso: {mascota['pesoKilogramos']} kg")
+            print(f"Activo: {'Sí' if mascota['activo'] else 'No'}")
             print("-" * 50)
             
     except FileNotFoundError:
@@ -26,8 +27,6 @@ def mostrarInformacionMascotas(rutaArchivoMascotasGuardadas):
         except:
             pass
     return
-
-
 
 #tomar informacion de mascota nueva
 def informacionMascotaNueva(rutaArchivoClientesGuardados):
@@ -49,6 +48,8 @@ def informacionMascotaNueva(rutaArchivoClientesGuardados):
 
     """
 
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadDueño = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadDueño == -1:
         return
@@ -156,6 +157,8 @@ def modificarInformacionMascotaExistente(rutaArchivoClientesGuardados, rutaArchi
         - pesoKilogramos (float): Peso de la mascota en kilogramos.
     """
 
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadDueño = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadDueño == -1:
         return
@@ -287,6 +290,8 @@ def guardarMascotaModificada(informacionMascota, rutaArchivoMascotasGuardados):
 def eliminarMascota(rutaArchivoMascotasGuardados, rutaArchivoClientesGuardados):
 
     
+    print("Informacion del cliente")
+    print("-----------------------")
     documentoIdentidadCliente = verificarDocumento(rutaArchivoClientesGuardados, True)
     if documentoIdentidadCliente == -1:
         return
